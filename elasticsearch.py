@@ -22,3 +22,6 @@ if __name__ == '__main__':
 
     for entity, labels in search(DOMAIN, QUERY).items():
         print(entity, labels)
+        
+        dfdsfds
+        
