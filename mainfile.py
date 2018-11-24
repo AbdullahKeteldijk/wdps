@@ -69,7 +69,7 @@ def create_output((x, text)):
 
 record_attribute = sys.argv[1]  # "WARC-Record-ID"
 in_file = sys.argv[2]  # "/data/sample.warc.gz"
-stanford = sys.argv[3] # https://nlp.stanford.edu/software/stanford-ner-2017-06-09.zip
+stanford = sys.argv[3] # https://nlp.stanford.edu/software/stanford-ner-2018-10-16.zip
 # We read one WARC file. This list will contain tuples consisting of the WARC-Record-ID and the cleaned up HTML
 
 # Create Spark Context -- Remove this when running on cluster
