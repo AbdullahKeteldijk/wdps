@@ -24,6 +24,7 @@ def split_records(stream):
 
 if __name__ == '__main__':
     import sys
+    import pdb
     try:
         _, INPUT = sys.argv
     except Exception as e:
@@ -31,7 +32,7 @@ if __name__ == '__main__':
         sys.exit(0)
 
     cheats = dict((line.split('\t',2) for line in open('data/sample-labels-cheat.txt').read().splitlines()))
-
+    pdb.set_trace()
     with open(INPUT, errors='ignore') as fo:
         for record in split_records(fo):
             for key, label, freebase_id in find_labels(record, cheats):
