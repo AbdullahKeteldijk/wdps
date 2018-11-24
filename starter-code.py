@@ -32,6 +32,7 @@ if __name__ == '__main__':
         sys.exit(0)
 
     cheats = dict((line.split('\t',2) for line in open('data/sample-labels-cheat.txt').read().splitlines()))
+    print(cheats)
     pdb.set_trace()
     with open(INPUT, errors='ignore') as fo:
         for record in split_records(fo):
