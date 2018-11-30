@@ -97,7 +97,7 @@ import collections, math
 # print(text_rdd.collect())
 
 ELASTICSEARCH_URL = 'http://node023:9200/freebase/label/_search'
-TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
+# TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
 
 query = 'obama' # token obtained 
 
