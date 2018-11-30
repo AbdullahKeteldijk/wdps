@@ -10,4 +10,4 @@ echo "elasticsearch should be running now on node $ES_NODE:$ES_PORT (connected t
 
 python3 elasticsearch.py $ES_NODE:$ES_PORT "Vrije Universiteit Amsterdam"
 
-kill $ES_PID
+# kill $ES_PID
