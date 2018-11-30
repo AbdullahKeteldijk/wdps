@@ -97,7 +97,7 @@ import collections, math
 # print(text_rdd.collect())
 
 ELASTICSEARCH_URL = 'http://node023:9200/freebase/label/_search'
-# TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
+TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
 
 query = 'obama' # token obtained 
 
@@ -105,24 +105,23 @@ print('Searching for "%s"...' % query)
 #looking for queries that we get from the token with elasticsearch
 response = requests.get(ELASTICSEARCH_URL, params={'q': query, 'size':100})
 
-print(response)
 #select unique query results 
 ids = set()
 labels = {}
 scores = {}
 
-# #obtain freebase id's from elasticsearch responses
-# if response:
-#     response = response.json()
-#     for hit in response.get('hits', {}).get('hits', []):
-#         freebase_id = hit.get('_source', {}).get('resource')
-#         label = hit.get('_source', {}).get('label')
-#         score = hit.get('_score', 0)
-#         ids.add( freebase_id )
-#         scores[freebase_id] = max(scores.get(freebase_id, 0), score)
-#         labels.setdefault(freebase_id, set()).add( label )
+#obtain freebase id's from elasticsearch responses
+if response:
+    response = response.json()
+    for hit in response.get('hits', {}).get('hits', []):
+        freebase_id = hit.get('_source', {}).get('resource')
+        label = hit.get('_source', {}).get('label')
+        score = hit.get('_score', 0)
+        ids.add( freebase_id )
+        scores[freebase_id] = max(scores.get(freebase_id, 0), score)
+        labels.setdefault(freebase_id, set()).add( label )
 
-# print('Found %s results.' % len(labels))
+print('Found %s results.' % len(labels))
 
 # #predixes to use shortnames in SPARQL query 
 # prefixes = """
