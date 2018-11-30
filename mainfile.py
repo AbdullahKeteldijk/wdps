@@ -96,8 +96,35 @@ import collections, math
 
 # print(text_rdd.collect())
 
-ELASTICSEARCH_URL = 'http://node023:9200/freebase/label/_search'
-TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
+## STARTING ELASTICSEARCH ##
+ES_PORT=9200
+ES_BIN=/home/bbkruit/scratch/wdps/elasticsearch-2.4.1/bin/elasticsearch
+
+prun -o .es_log -v -np 1 ESPORT=$ES_PORT $ES_BIN </dev/null 2> .es_node &
+echo "waiting 15 seconds for elasticsearch to set up..."
+sleep 15
+ES_NODE=$(cat .es_node | grep '^:' | grep -oP '(node...)')
+ES_PID=$!
+echo "elasticsearch should be running now on node $ES_NODE:$ES_PORT (connected to process $ES_PID)"
+
+edomain = $ES_NODE:$ES_PORT
+
+## STARTING TRIDENT ##
+KB_PORT=9090
+KB_BIN=/home/bbkruit/scratch/trident/build/trident
+KB_PATH=/home/jurbani/data/motherkb-trident
+
+prun -o .kb_log -v -np 1 $KB_BIN server -i $KB_PATH --port $KB_PORT </dev/null 2> .kb_node &
+echo "waiting 5 seconds for trident to set up..."
+sleep 5
+KB_NODE=$(cat .kb_node | grep '^:' | grep -oP '(node...)')
+KB_PID=$!
+echo "trident should be running now on node $KB_NODE:$KB_PORT (connected to process $KB_PID)"
+
+tdomain = $KB_NODE:$KB_PORT
+
+ELASTICSEARCH_URL = 'http://%s/freebase/label/_search' % edomain
+TRIDENT_URL = 'http://%s/sparql' % tdomain
 
 query = 'obama' # token obtained 
 
