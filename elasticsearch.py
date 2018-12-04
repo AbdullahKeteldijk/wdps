@@ -2,6 +2,7 @@ import requests
 
 def search(domain, query):
     url = 'http://%s/freebase/label/_search' % domain
+    print(domain)
     response = requests.get(url, params={'q': query, 'size':1000})
     id_labels = {}
     if response:
