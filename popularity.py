@@ -57,5 +57,5 @@ if __name__ == '__main__':
         pdb.set_trace()
     
     match_key = max(hamming, key = lambda x : hamming[x][1])
-    print('Best Match = ', match_key ,':' hamming[match_key][0])
+    print('Best Match = ', match_key ,':', hamming[match_key][0])
      
