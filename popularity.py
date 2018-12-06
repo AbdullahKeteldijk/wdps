@@ -55,6 +55,7 @@ if __name__ == '__main__':
     for entity, labels in search(DOMAIN, QUERY).items():
         print(entity, labels)
         hamming[entity] = [labels, Hamming(labels,QUERY)]
+        pdb.set_trace()
     
     match_key = max(hamming, key = lambda x : hamming[x][1])
     print('Best Match = ', match_key ,':', hamming[match_key][0])
