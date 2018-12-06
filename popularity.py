@@ -21,6 +21,7 @@ def search(domain, query):
 def Hamming(labels, query):
     lh = []
     for i in len(labels):
+        i
         str1   = labels.pop()
         str2   = query
         str1_  = str1
@@ -52,7 +53,6 @@ if __name__ == '__main__':
     hamming={}
     for entity, labels in search(DOMAIN, QUERY).items():
         print(entity, labels)
-        pdb.set_trace()
         hamming[entity] = [labels, Hamming(labels,QUERY)]
         pdb.set_trace()
     
