@@ -20,9 +20,10 @@ def search(domain, query):
 
 def Hamming(labels, query):
     lh = []
-    for i in len(labels):
-        i
-        str1   = labels.pop()
+    for i in range(len(labels)):
+        pdb.set_trace()
+        list   = list(labels)
+        str1   = list[i]
         str2   = query
         str1_  = str1
         str2_  = str2
@@ -54,7 +55,6 @@ if __name__ == '__main__':
     for entity, labels in search(DOMAIN, QUERY).items():
         print(entity, labels)
         hamming[entity] = [labels, Hamming(labels,QUERY)]
-        pdb.set_trace()
     
     match_key = max(hamming, key = lambda x : hamming[x][1])
     print('Best Match = ', match_key ,':', hamming[match_key][0])
