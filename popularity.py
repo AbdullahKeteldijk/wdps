@@ -1,7 +1,7 @@
 import requests
 import operator
-from nltk.corpus import stopwords
-from collections import Counter
+# from nltk.corpus import stopwords
+# from collections import Counter
 from math import log
 import numpy as np
 import pdb
