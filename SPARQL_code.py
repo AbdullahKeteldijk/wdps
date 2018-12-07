@@ -105,7 +105,7 @@ for i in ids:
         print(i, ':', n)
         sys.stdout.flush()
         facts[i] = n
-	n_total = n_total+n
+	 n_total = n_total+n
  
 def get_best(i):
     return math.log(facts[i]) * scores[i]
