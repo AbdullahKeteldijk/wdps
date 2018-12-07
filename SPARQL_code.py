@@ -2,6 +2,7 @@
 # TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
 import sys
 import requests
+import pdb
 
 _, DOMAIN_ELASTIC, DOMAIN_TRIDENT 	= sys.argv
 ELASTICSEARCH_URL			= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
@@ -22,6 +23,7 @@ scores = {}
 #obtain freebase id's from elasticsearch responses
 if response:
 	response = response.json()
+	pdb.set_trace()
 for hit in response.get('hits', {}).get('hits', []):
 	freebase_id = hit.get('_source', {}).get('resource')
 	label = hit.get('_source', {}).get('label')
