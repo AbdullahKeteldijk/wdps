@@ -17,7 +17,7 @@ scores = {}
 if response:
     response = response.json()
     for hit in response.get('hits', {}).get('hits', []):
-	freebase_id = hit.get('_source', {}).get('resource')
+   	freebase_id = hit.get('_source', {}).get('resource')
 	label = hit.get('_source', {}).get('label')
 	score = hit.get('_score', 0)
 	ids.add( freebase_id )
