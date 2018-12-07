@@ -52,6 +52,7 @@ if __name__ == '__main__':
         sys.exit(0)
     
     hamming={}
+    pdb.set_trace()
     for entity, labels in search(DOMAIN, QUERY).items():
         print(entity, labels)
         hamming[entity] = [labels, Hamming(labels,QUERY)]
