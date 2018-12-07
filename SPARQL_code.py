@@ -13,6 +13,7 @@ query = 'obama' # token obtained
 print('Searching for "%s"...' % query)
 #looking for queries that we get from the token with elasticsearch
 response = requests.get(ELASTICSEARCH_URL, params={'q': query, 'size':100})
+pdb.set_trace()
 
 
 #select unique query results 
@@ -23,7 +24,6 @@ scores = {}
 #obtain freebase id's from elasticsearch responses
 if response:
 	response = response.json()
-	pdb.set_trace()
 for hit in response.get('hits', {}).get('hits', []):
 	freebase_id = hit.get('_source', {}).get('resource')
 	label = hit.get('_source', {}).get('label')
