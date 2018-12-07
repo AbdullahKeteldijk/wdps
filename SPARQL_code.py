@@ -1,3 +1,4 @@
+HI
 ELASTICSEARCH_URL = 'http://10.149.0.127:9200/freebase/label/_search'
 TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
 
