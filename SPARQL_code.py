@@ -1,4 +1,3 @@
-HI
 ELASTICSEARCH_URL = 'http://10.149.0.127:9200/freebase/label/_search'
 TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
 
@@ -16,9 +15,9 @@ scores = {}
 
 #obtain freebase id's from elasticsearch responses
 if response:
-    response = response.json()
-    for hit in response.get('hits', {}).get('hits', []):
-   	freebase_id = hit.get('_source', {}).get('resource')
+	response = response.json()
+for hit in response.get('hits', {}).get('hits', []):
+	freebase_id = hit.get('_source', {}).get('resource')
 	label = hit.get('_source', {}).get('label')
 	score = hit.get('_score', 0)
 	ids.add( freebase_id )
@@ -46,9 +45,9 @@ personEntity_same_as_template = prefixes + """
 SELECT DISTINCT ?person 
 WHERE
 {
-	?person wdt:P31 wd:Q5 .       #where ?person isa(wdt:P31) human(wd:Q5)
-	?s owl:sameAs %s .
-	{ ?s owl:sameAs ?person .} UNION { ?person owl:sameAs ?s .}
+?person wdt:P31 wd:Q5 .       #where ?person isa(wdt:P31) human(wd:Q5)
+?s owl:sameAs %s .
+{ ?s owl:sameAs ?person .} UNION { ?person owl:sameAs ?s .}
 }
 """
 
@@ -58,10 +57,10 @@ organisationEntity_same_as_template = prefixes + """
 SELECT DISTINCT ?organisation ?organisation2 
 WHERE 
 {
-  ?organisation wdt:P31 wd:Q43229. #organisation(Q43229) (collective goal)
-  ?organisation2 wdt:P31 wd:Q2029841. #organisation(Q2029841) (economical concept)
-  ?s owl:sameAs %s .
-  { ?s owl:sameAs ?organisation . OR ?s owl:sameAs ?organisation . } UNION { ?organisation  owl:sameAs ?s . OR ?organisation2  owl:sameAs ?s .}
+?organisation wdt:P31 wd:Q43229. #organisation(Q43229) (collective goal)
+?organisation2 wdt:P31 wd:Q2029841. #organisation(Q2029841) (economical concept)
+?s owl:sameAs %s .
+{ ?s owl:sameAs ?organisation . OR ?s owl:sameAs ?organisation . } UNION { ?organisation  owl:sameAs ?s . OR ?organisation2  owl:sameAs ?s .}
 }
 """
 
@@ -71,9 +70,9 @@ locationEntity_same_as_template = prefixes + """
 SELECT DISTINCT ?location 
 WHERE 
 {
-  ?location wdt:P31 wd:Q17334923. #where ?location isA location(Q17334923)
-  ?s owl:sameAs %s .
-  { ?s owl:sameAs ?location .} UNION { ?location owl:sameAs ?s .}
+?location wdt:P31 wd:Q17334923. #where ?location isA location(Q17334923)
+?s owl:sameAs %s .
+{ ?s owl:sameAs ?location .} UNION { ?location owl:sameAs ?s .}
 }
 """
 
@@ -83,14 +82,14 @@ same_as_template = prefixes + """
 SELECT DISTINCT ?same 
 WHERE 
 {
-    ?s owl:sameAs %s .
-    { ?s owl:sameAs ?same .} UNION { ?same owl:sameAs ?s .}
+?s owl:sameAs %s .
+{ ?s owl:sameAs ?same .} UNION { ?same owl:sameAs ?s .}
 }
 """
 # get the complete template for the freebase hit %s
 po_template = prefixes + """
 SELECT DISTINCT * WHERE {
-    %s ?p ?o.
+%s ?p ?o.
 }
 """
 
@@ -99,8 +98,8 @@ print('Counting KB facts...')
 facts  = {}
 n_total = 0
 for i in ids:
-    response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
-    if response:
+	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
+if response:
 	response = response.json()
 	n = int(response.get('stats',{}).get('nresults',0))
 	print(i, ':', n)
@@ -109,41 +108,41 @@ for i in ids:
 	n_total = n_total+n
 
 def get_best(i):
-    return math.log(facts[i]) * scores[i]
+	return math.log(facts[i]) * scores[i]
 
 #best matches are filtered based on the entity type
 print('Best matches:')
 for i in sorted(ids, key=get_best, reverse=True)[:3]:
-    print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
+	print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
 
-    # the normalized score, which we will use when ranking the obtained entities
-    norm_score = facts[i]/n_total
+# the normalized score, which we will use when ranking the obtained entities
+norm_score = facts[i]/n_total
 
-    sys.stdout.flush()
-	#look which entity it is to choose the suited SPARQL query , tag = NER tag 
-	if tag == PERSON:
-	    response = requests.post(TRIDENT_URL, data={'print': True, 'query': personEntity_same_as_template % i})
-	    if response:
-		response = response.json()
-		for binding in response.get('results', {}).get('bindings', []):
-		    print(' =', binding.get('same', {}).get('value', None))
+sys.stdout.flush()
+#look which entity it is to choose the suited SPARQL query , tag = NER tag 
+if tag == PERSON:
+	response = requests.post(TRIDENT_URL, data={'print': True, 'query': personEntity_same_as_template % i})
+if response:
+	response = response.json()
+for binding in response.get('results', {}).get('bindings', []):
+	print(' =', binding.get('same', {}).get('value', None))
 
-	elif tag == ORGANISATION:
-	    response = requests.post(TRIDENT_URL, data={'print': True, 'query': organisationEntity_same_as_template % i})
-	    if response:
-		response = response.json()
-		for binding in response.get('results', {}).get('bindings', []):
-		    print(' =', binding.get('same', {}).get('value', None))
+elif tag == ORGANISATION:
+	response = requests.post(TRIDENT_URL, data={'print': True, 'query': organisationEntity_same_as_template % i})
+if response:
+	response = response.json()
+for binding in response.get('results', {}).get('bindings', []):
+	print(' =', binding.get('same', {}).get('value', None))
 
-	elif tag == LOCATION:
-	    response = requests.post(TRIDENT_URL, data={'print': True, 'query': locationEntity_same_as_template % i})
-	    if response:
-		response = response.json()
-		for binding in response.get('results', {}).get('bindings', []):
-		    print(' =', binding.get('same', {}).get('value', None))
-	else:
-	    response = requests.post(TRIDENT_URL, data={'print': True, 'query': same_as_template % i})
-	    if response:
-		response = response.json()
-		for binding in response.get('results', {}).get('bindings', []):
-		    print(' =', binding.get('same', {}).get('value', None))
+elif tag == LOCATION:
+	response = requests.post(TRIDENT_URL, data={'print': True, 'query': locationEntity_same_as_template % i})
+if response:
+	response = response.json()
+for binding in response.get('results', {}).get('bindings', []):
+ 	print(' =', binding.get('same', {}).get('value', None))
+else:
+	response = requests.post(TRIDENT_URL, data={'print': True, 'query': same_as_template % i})
+if response:
+	response = response.json()
+for binding in response.get('results', {}).get('bindings', []):
+   	print(' =', binding.get('same', {}).get('value', None))
