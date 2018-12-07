@@ -1,9 +1,11 @@
 # ELASTICSEARCH_URL = 'http://10.149.0.127:9200/freebase/label/_search'
 # TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
 import sys
-_, DOMAIN_ELASTIC, DOMAIN_TRIDENT = sys.argv
-ELASTICSEARCH_URL	= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
-TRIDENT_URL 		= 'http://%s/sparql' % DOMAIN_TRIDENT
+import requests
+
+_, DOMAIN_ELASTIC, DOMAIN_TRIDENT 	= sys.argv
+ELASTICSEARCH_URL			= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
+TRIDENT_URL 				= 'http://%s/sparql' % DOMAIN_TRIDENT
 
 query = 'obama' # token obtained 
 
