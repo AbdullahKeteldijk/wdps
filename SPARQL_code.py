@@ -17,12 +17,12 @@ scores = {}
 if response:
     response = response.json()
     for hit in response.get('hits', {}).get('hits', []):
-        freebase_id = hit.get('_source', {}).get('resource')
-        label = hit.get('_source', {}).get('label')
-        score = hit.get('_score', 0)
-        ids.add( freebase_id )
-        scores[freebase_id] = max(scores.get(freebase_id, 0), score)
-        labels.setdefault(freebase_id, set()).add( label )
+	freebase_id = hit.get('_source', {}).get('resource')
+	label = hit.get('_source', {}).get('label')
+	score = hit.get('_score', 0)
+	ids.add( freebase_id )
+	scores[freebase_id] = max(scores.get(freebase_id, 0), score)
+	labels.setdefault(freebase_id, set()).add( label )
 
 print('Found %s results.' % len(labels))
 
@@ -47,7 +47,7 @@ WHERE
 {
 	?person wdt:P31 wd:Q5 .       #where ?person isa(wdt:P31) human(wd:Q5)
 	?s owl:sameAs %s .
-    	{ ?s owl:sameAs ?person .} UNION { ?person owl:sameAs ?s .}
+	{ ?s owl:sameAs ?person .} UNION { ?person owl:sameAs ?s .}
 }
 """
 
@@ -100,13 +100,13 @@ n_total = 0
 for i in ids:
     response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
     if response:
-     	response = response.json()
-   	n = int(response.get('stats',{}).get('nresults',0))
-   	print(i, ':', n)
-    	sys.stdout.flush()
- 	facts[i] = n
- 	n_total = n_total+n
- 
+	response = response.json()
+	n = int(response.get('stats',{}).get('nresults',0))
+	print(i, ':', n)
+	sys.stdout.flush()
+	facts[i] = n
+	n_total = n_total+n
+
 def get_best(i):
     return math.log(facts[i]) * scores[i]
 
@@ -114,26 +114,26 @@ def get_best(i):
 print('Best matches:')
 for i in sorted(ids, key=get_best, reverse=True)[:3]:
     print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
-    
+
     # the normalized score, which we will use when ranking the obtained entities
     norm_score = facts[i]/n_total
-    
+
     sys.stdout.flush()
 	#look which entity it is to choose the suited SPARQL query , tag = NER tag 
 	if tag == PERSON:
-      	    response = requests.post(TRIDENT_URL, data={'print': True, 'query': personEntity_same_as_template % i})
+	    response = requests.post(TRIDENT_URL, data={'print': True, 'query': personEntity_same_as_template % i})
 	    if response:
 		response = response.json()
 		for binding in response.get('results', {}).get('bindings', []):
 		    print(' =', binding.get('same', {}).get('value', None))
-		
+
 	elif tag == ORGANISATION:
 	    response = requests.post(TRIDENT_URL, data={'print': True, 'query': organisationEntity_same_as_template % i})
 	    if response:
 		response = response.json()
 		for binding in response.get('results', {}).get('bindings', []):
 		    print(' =', binding.get('same', {}).get('value', None))
-		
+
 	elif tag == LOCATION:
 	    response = requests.post(TRIDENT_URL, data={'print': True, 'query': locationEntity_same_as_template % i})
 	    if response:
