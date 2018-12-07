@@ -2,6 +2,7 @@
 # TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
 import sys
 _, DOMAIN = sys.argv
+TRIDENT_URL = 'http://%s/sparql' % DOMAIN
 # query = 'obama' # token obtained 
 
 # print('Searching for "%s"...' % query)
