@@ -1,32 +1,34 @@
 # ELASTICSEARCH_URL = 'http://10.149.0.127:9200/freebase/label/_search'
 # TRIDENT_URL = 'http://10.141.0.11:8082/sparql'
 import sys
-_, DOMAIN = sys.argv
-TRIDENT_URL = 'http://%s/sparql' % DOMAIN
-# query = 'obama' # token obtained 
+_, DOMAIN_ELASTIC, DOMAIN_TRIDENT = sys.argv
+ELASTICSEARCH_URL	= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
+TRIDENT_URL 		= 'http://%s/sparql' % DOMAIN_TRIDENT
 
-# print('Searching for "%s"...' % query)
-# #looking for queries that we get from the token with elasticsearch
-# response = requests.get(ELASTICSEARCH_URL, params={'q': query, 'size':100})
+query = 'obama' # token obtained 
+
+print('Searching for "%s"...' % query)
+#looking for queries that we get from the token with elasticsearch
+response = requests.get(ELASTICSEARCH_URL, params={'q': query, 'size':100})
 
 
-# #select unique query results 
-# ids = set()
-# labels = {}
-# scores = {}
+#select unique query results 
+ids = set()
+labels = {}
+scores = {}
 
-# #obtain freebase id's from elasticsearch responses
-# if response:
-# 	response = response.json()
-# for hit in response.get('hits', {}).get('hits', []):
-# 	freebase_id = hit.get('_source', {}).get('resource')
-# 	label = hit.get('_source', {}).get('label')
-# 	score = hit.get('_score', 0)
-# 	ids.add( freebase_id )
-# 	scores[freebase_id] = max(scores.get(freebase_id, 0), score)
-# 	labels.setdefault(freebase_id, set()).add( label )
+#obtain freebase id's from elasticsearch responses
+if response:
+	response = response.json()
+for hit in response.get('hits', {}).get('hits', []):
+	freebase_id = hit.get('_source', {}).get('resource')
+	label = hit.get('_source', {}).get('label')
+	score = hit.get('_score', 0)
+	ids.add( freebase_id )
+	scores[freebase_id] = max(scores.get(freebase_id, 0), score)
+	labels.setdefault(freebase_id, set()).add( label )
 
-# print('Found %s results.' % len(labels))
+print('Found %s results.' % len(labels))
 
 #predixes to use shortnames in SPARQL query 
 prefixes = """
