@@ -21,12 +21,11 @@ def search(domain, query):
 def Hamming(labels, query):
     lh = []
     for i in range(len(labels)):
-        pdb.set_trace()
-        list   = list(labels)
-        str1   = list[i]
-        str2   = query
-        str1_  = str1
-        str2_  = str2
+        list1 = list(labels)
+        str1 = list1[i]
+        str2 = query
+        str1_ = str1
+        str2_ = str2
 
         if len(str1) > len(str2):
             dif = len(str1) - len(str2)
@@ -35,11 +34,11 @@ def Hamming(labels, query):
         elif len(str1) < len(str2):
             dif = len(str2) - len(str1)
             for i in range(dif):
-                str1_ = str1_ + "0"      
+                str1_ = str1_ + "0"
 
         ne = operator.ne
-        lh.append( sum(map(ne, str1_, str2_)) )
-        
+        lh.append(sum(map(ne, str1_, str2_)))
+
     return sum(lh)
     
 
