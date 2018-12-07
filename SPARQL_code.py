@@ -100,12 +100,12 @@ n_total = 0
 for i in ids:
     response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
     if response:
-        response = response.json()
-        n = int(response.get('stats',{}).get('nresults',0))
-        print(i, ':', n)
-        sys.stdout.flush()
-        facts[i] = n
-	 n_total = n_total+n
+     	response = response.json()
+   	n = int(response.get('stats',{}).get('nresults',0))
+   	print(i, ':', n)
+    	sys.stdout.flush()
+ 	facts[i] = n
+ 	n_total = n_total+n
  
 def get_best(i):
     return math.log(facts[i]) * scores[i]
