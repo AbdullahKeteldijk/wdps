@@ -8,6 +8,6 @@ ES_NODE=$(cat .es_node | grep '^:' | grep -oP '(node...)')
 ES_PID=$!
 echo "elasticsearch should be running now on node $ES_NODE:$ES_PORT (connected to process $ES_PID)"
 
-python3 elasticsearch.py $ES_NODE:$ES_PORT "Vrije Universiteit Amsterdam"
+python3 elasticsearch.py $ES_NODE:$ES_PORT "Obama"
 
 kill $ES_PID
