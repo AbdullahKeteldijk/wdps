@@ -4,17 +4,17 @@ import sys
 import requests
 import pdb
 
-_, DOMAIN_ELASTIC, DOMAIN_TRIDENT 	= sys.argv
-ELASTICSEARCH_URL			= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
+# _, DOMAIN_ELASTIC, DOMAIN_TRIDENT 	= sys.argv
+_, DOMAIN_TRIDENT = sys.argv
+# ELASTICSEARCH_URL			= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
 TRIDENT_URL 				= 'http://%s/sparql' % DOMAIN_TRIDENT
 
-query = 'obama' # token obtained 
-
-print('Searching for "%s"...' % query)
-#looking for queries that we get from the token with elasticsearch
-response = requests.get(ELASTICSEARCH_URL, params={'q': query, 'size':100})
-pdb.set_trace()
-
+# query = 'obama' # token obtained
+#
+# print('Searching for "%s"...' % query)
+# #looking for queries that we get from the token with elasticsearch
+# response = requests.get(ELASTICSEARCH_URL, params={'q': query, 'size':100})
+#
 
 #select unique query results 
 ids = set()
@@ -22,8 +22,12 @@ labels = {}
 scores = {}
 
 #obtain freebase id's from elasticsearch responses
-if response:
-	response = response.json()
+#if response:
+# 	response = response.json()
+import json
+with open('elastic_output.json') as json_file:
+    response = json.load(json_file)
+
 for hit in response.get('hits', {}).get('hits', []):
 	freebase_id = hit.get('_source', {}).get('resource')
 	label = hit.get('_source', {}).get('label')
@@ -31,6 +35,8 @@ for hit in response.get('hits', {}).get('hits', []):
 	ids.add( freebase_id )
 	scores[freebase_id] = max(scores.get(freebase_id, 0), score)
 	labels.setdefault(freebase_id, set()).add( label )
+
+
 
 print('Found %s results.' % len(labels))
 
@@ -114,6 +120,7 @@ if response:
 	sys.stdout.flush()
 	facts[i] = n
 	n_total = n_total+n
+pdb.set_trace()
 
 def get_best(i):
 	return math.log(facts[i]) * scores[i]

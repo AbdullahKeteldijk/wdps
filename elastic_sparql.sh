@@ -10,16 +10,16 @@
 # echo "elasticsearch should be running now on node $ES_NODE:$ES_PORT (connected to process $ES_PID)"
 ######
 
-ES_PORT=9200
-ES_BIN=$(realpath ~/scratch/elasticsearch-2.4.1/bin/elasticsearch)
-
->.es_log*
-prun -o .es_log -v -np 1 ESPORT=$ES_PORT $ES_BIN </dev/null 2> .es_node &
-echo "waiting for elasticsearch to set up..."
-until [ -n "$ES_NODE" ]; do ES_NODE=$(cat .es_node | grep '^:' | grep -oP '(node...)'); done
-ES_PID=$!
-until [ -n "$(cat .es_log* | grep YELLOW)" ]; do sleep 1; done
-echo "elasticsearch should be running now on node $ES_NODE:$ES_PORT (connected to process $ES_PID)"
+#ES_PORT=9200
+#ES_BIN=$(realpath ~/scratch/elasticsearch-2.4.1/bin/elasticsearch)
+#
+#>.es_log*
+#prun -o .es_log -v -np 1 ESPORT=$ES_PORT $ES_BIN </dev/null 2> .es_node &
+#echo "waiting for elasticsearch to set up..."
+#until [ -n "$ES_NODE" ]; do ES_NODE=$(cat .es_node | grep '^:' | grep -oP '(node...)'); done
+#ES_PID=$!
+#until [ -n "$(cat .es_log* | grep YELLOW)" ]; do sleep 1; done
+#echo "elasticsearch should be running now on node $ES_NODE:$ES_PORT (connected to process $ES_PID)"
 
 # python3 elasticsearch.py $ES_NODE:$ES_PORT "Vrije Universiteit Amsterdam"
 
@@ -41,7 +41,7 @@ echo "trident should be running now on node $KB_NODE:$KB_PORT (connected to proc
 
 # python3 sparql.py $KB_NODE:$KB_PORT "select * where {?s <http://www.w3.org/2002/07/owl#sameAs> <http://rdf.freebase.com/ns/m.0k3p> . ?s <http://www.w3.org/2002/07/owl#sameAs> ?o .}"
 
-python3 SPARQL_code.py $ES_NODE:$ES_PORT $KB_NODE:$KB_PORT
+python SPARQL_code.py $KB_NODE:$KB_PORT  # $ES_NODE:$ES_PORT
 
 #kill $KB_PID
 #kill $ES_PID
