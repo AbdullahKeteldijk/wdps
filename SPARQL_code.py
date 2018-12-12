@@ -41,7 +41,7 @@ for hit in response.get('hits', {}).get('hits', []):
 print('Found %s results.' % len(labels))
 
 #predixes to use shortnames in SPARQL query 
-prefixes = """
+prefixes = "
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -50,12 +50,12 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wds: <http://www.wikidata.org/entity/statement/>
 PREFIX wdv: <http://www.wikidata.org/value/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-"""
+"
 ### look at NER  tag. if person filter with personEntity, if location filter with locationEntity if organisation
 #filter with organisation entity
 
 #select person entity 
-personEntity_same_as_template = prefixes + """
+personEntity_same_as_template = prefixes + "
 SELECT DISTINCT ?person 
 WHERE
 {
@@ -63,11 +63,11 @@ WHERE
 ?s owl:sameAs %s .
 { ?s owl:sameAs ?person .} UNION { ?person owl:sameAs ?s .}
 }
-"""
+"
 
 #select organisation enitity 
 
-organisationEntity_same_as_template = prefixes + """
+organisationEntity_same_as_template = prefixes + "
 SELECT DISTINCT ?organisation ?organisation2 
 WHERE 
 {
@@ -76,11 +76,11 @@ WHERE
 ?s owl:sameAs %s .
 { ?s owl:sameAs ?organisation . OR ?s owl:sameAs ?organisation . } UNION { ?organisation  owl:sameAs ?s . OR ?organisation2  owl:sameAs ?s .}
 }
-"""
+"
 
 #select location enitity 
 
-locationEntity_same_as_template = prefixes + """
+locationEntity_same_as_template = prefixes + "
 SELECT DISTINCT ?location 
 WHERE 
 {
@@ -88,24 +88,21 @@ WHERE
 ?s owl:sameAs %s .
 { ?s owl:sameAs ?location .} UNION { ?location owl:sameAs ?s .}
 }
-"""
+"
 
 
 #get the word similar to the freebase hit %s
-same_as_template = prefixes + """
+same_as_template = prefixes + "
 SELECT DISTINCT ?same 
 WHERE 
 {
 ?s owl:sameAs %s .
 { ?s owl:sameAs ?same .} UNION { ?same owl:sameAs ?s .}
 }
-"""
+"
+
 # get the complete template for the freebase hit %s
-po_template = prefixes + """
-SELECT DISTINCT * WHERE {
-%s ?p ?o.
-}
-"""
+po_template = prefixes + "SELECT DISTINCT * WHERE {%s ?p ?o.}"
 
 print('Counting KB facts...')
 #Link all results from elasticsearch to trident database.  %s in po_templare (are the unique freebase hits)  
