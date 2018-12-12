@@ -1,4 +1,5 @@
 import requests
+import pdb
 
 def search(domain, query):
     url = 'http://%s/freebase/label/_search' % domain
@@ -11,6 +12,7 @@ def search(domain, query):
             freebase_id     = hit.get('_source', {}).get('resource')
             freebas_score   = hit.get('_score',0)
             id_labels.setdefault(freebase_id, set()).add( freebase_label )
+            pdb.set_trace()
             id_labels.add(freebase_score)
     return id_labels
 
