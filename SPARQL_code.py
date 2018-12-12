@@ -103,7 +103,7 @@ WHERE
 """
 
 # get the complete template for the freebase hit %s
-po_template = prefixes + "SELECT DISTINCT * WHERE {%s ?p ?o.}"
+po_template = prefixes + "SELECT DISTINCT * WHERE {?s %s ?p ?o.}"
 
 print('Counting KB facts...')
 #Link all results from elasticsearch to trident database.  %s in po_templare (are the unique freebase hits)  
