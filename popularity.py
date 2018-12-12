@@ -9,7 +9,7 @@ import pdb
 def search(domain, query):
     url = 'http://%s/freebase/label/_search' % domain
     response = requests.get(url, params={'q': query, 'size':1000})
-    
+    pdb.set_trace()
     #select unique query results 
     ids = set()
     id_labels = {}
@@ -58,8 +58,8 @@ if __name__ == '__main__':
         sys.exit(0)
     
     hamming={}
-    pdb.set_trace()
-    for entity, labels in search(DOMAIN, QUERY).items():
+    
+    for entity, labels, scores in search(DOMAIN, QUERY).items():
         print(entity, labels)
         hamming[entity] = [labels, Hamming(labels,QUERY)]
         
