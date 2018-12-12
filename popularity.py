@@ -13,11 +13,13 @@ def search(domain, query):
     if response:
         response = response.json()
         for hit in response.get('hits', {}).get('hits', []):
-            freebase_label = hit.get('_source', {}).get('label')
-            freebase_id = hit.get('_source', {}).get('resource')
-            id_labels.setdefault(freebase_id, set()).add( freebase_label )
-    pdb.set_trace()
-    return id_labels
+        freebase_id = hit.get('_source', {}).get('resource')
+        label = hit.get('_source', {}).get('label')
+        score = hit.get('_score', 0)
+        ids.add( freebase_id )
+        scores[freebase_id] = max(scores.get(freebase_id, 0), score)
+        id_labels.setdefault(freebase_id, set()).add( label )
+    return id_labels, scores
 
 def Hamming(labels, query):
     lh = []
@@ -56,7 +58,7 @@ if __name__ == '__main__':
         print(entity, labels)
         hamming[entity] = [labels, Hamming(labels,QUERY)]
         
-    
+    pdb.set_trace()
     match_key = max(hamming, key = lambda x : hamming[x][1])
     print('Best Match = ', match_key ,':', hamming[match_key][0])
      
