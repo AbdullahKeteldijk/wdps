@@ -9,7 +9,11 @@ import pdb
 def search(domain, query):
     url = 'http://%s/freebase/label/_search' % domain
     response = requests.get(url, params={'q': query, 'size':1000})
+    
+    #select unique query results 
+    ids = set()
     id_labels = {}
+    scores = {}
     if response:
         response = response.json()
         for hit in response.get('hits', {}).get('hits', []):
