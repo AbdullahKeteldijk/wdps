@@ -41,8 +41,7 @@ for hit in response.get('hits', {}).get('hits', []):
 print('Found %s results.' % len(labels))
 
 #predixes to use shortnames in SPARQL query 
-prefixes = 
-"""
+prefixes = """
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -57,8 +56,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 #filter with organisation entity
 
 #select person entity 
-personEntity_same_as_template = prefixes + 
-"""
+personEntity_same_as_template = prefixes + """
 SELECT DISTINCT ?person 
 WHERE
 {
@@ -70,8 +68,7 @@ WHERE
 
 #select organisation enitity 
 
-organisationEntity_same_as_template = prefixes + 
-"""
+organisationEntity_same_as_template = prefixes + """
 SELECT DISTINCT ?organisation ?organisation2 
 WHERE 
 {
@@ -84,8 +81,7 @@ WHERE
 
 #select location enitity 
 
-locationEntity_same_as_template = prefixes + 
-"""
+locationEntity_same_as_template = prefixes + """
 SELECT DISTINCT ?location 
 WHERE 
 {
@@ -97,8 +93,7 @@ WHERE
 
 
 #get the word similar to the freebase hit %s
-same_as_template = prefixes + 
-"""
+same_as_template = prefixes + """
 SELECT DISTINCT ?same 
 WHERE 
 {
