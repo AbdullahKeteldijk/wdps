@@ -16,6 +16,7 @@ def search(domain, query):
             freebase_label = hit.get('_source', {}).get('label')
             freebase_id = hit.get('_source', {}).get('resource')
             id_labels.setdefault(freebase_id, set()).add( freebase_label )
+    pdb.set_trace()
     return id_labels
 
 def Hamming(labels, query):
@@ -51,11 +52,10 @@ if __name__ == '__main__':
         sys.exit(0)
     
     hamming={}
-    pdb.set_trace()
     for entity, labels in search(DOMAIN, QUERY).items():
         print(entity, labels)
         hamming[entity] = [labels, Hamming(labels,QUERY)]
-        pdb.set_trace()
+        
     
     match_key = max(hamming, key = lambda x : hamming[x][1])
     print('Best Match = ', match_key ,':', hamming[match_key][0])
