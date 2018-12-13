@@ -104,15 +104,14 @@ WHERE
 
 # get the complete template for the freebase hit %s
 # po_template = prefixes + "SELECT DISTINCT * WHERE {fbase: %s ?p ?o.}"
-po_template = "SELECT * WHERE {<http://rdf.freebase.com/ns/%s> ?p ?o} limit 100"
+po_template = "SELECT * WHERE {<http://rdf.freebase.com/ns/%s> ?p ?o}"
 
 print('Counting KB facts...')
 #Link all results from elasticsearch to trident database.  %s in po_templare (are the unique freebase hits)  
 facts  = {}
 n_total = 0
 for i in ids:
-	response = requests.post(TRIDENT_URL, data={'print': True, 'query': po_template % i})
-	pdb.set_trace()
+	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
 	if response:
 		response = response.json()
 		n = int(response.get('stats',{}).get('nresults',0))
@@ -120,6 +119,7 @@ for i in ids:
 		sys.stdout.flush()
 		facts[i] = n
 		n_total = n_total+n
+		pdb.set_trace()
 
 
 def get_best(i):
