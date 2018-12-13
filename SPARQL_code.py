@@ -114,6 +114,7 @@ n_total = 0
 for i in ids:
 	i = i.replace('/','.')
 	i = i[1:]
+for i in ids:
 	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
 	if response:
 		response = response.json()
