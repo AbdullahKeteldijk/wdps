@@ -113,13 +113,14 @@ n_total = 0
 for i in ids:
 	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
 	if response:
+		pdb.set_trace()
 		response = response.json()
 		n = int(response.get('stats',{}).get('nresults',0))
 		print(i, ':', n)
 		sys.stdout.flush()
 		facts[i] = n
 		n_total = n_total+n
-		pdb.set_trace()
+		
 
 
 def get_best(i):
