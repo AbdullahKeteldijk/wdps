@@ -103,14 +103,14 @@ WHERE
 """
 
 # get the complete template for the freebase hit %s
-po_template = prefixes + """SELECT DISTINCT * WHERE {fbase: %s ?p ?o.}"""
+po_template = prefixes + "SELECT * WHERE {fbase: %s ?p ?o.}"
 
 print('Counting KB facts...')
 #Link all results from elasticsearch to trident database.  %s in po_templare (are the unique freebase hits)  
 facts  = {}
 n_total = 0
 for i in ids:
-	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
+	response = requests.post(TRIDENT_URL, data={'print': True, 'query': po_template % i})
 	pdb.set_trace()
 	if response:
 		response = response.json()
