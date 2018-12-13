@@ -111,6 +111,8 @@ print('Counting KB facts...')
 facts  = {}
 n_total = 0
 for i in ids:
+	i = i.replace('/','.')
+	i = i[1:]
 	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
 	if response:
 		pdb.set_trace()
