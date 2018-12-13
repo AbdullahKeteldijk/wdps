@@ -112,9 +112,8 @@ print('Counting KB facts...')
 facts  = {}
 n_total = 0
 for i in ids:
-	ids[i] = i.replace('/','.')
-	ids[i] = i[1:]
-for i in ids:
+	i = i.replace('/','.')
+	i = i[1:]
 	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
 	if response:
 		response = response.json()
@@ -127,6 +126,8 @@ for i in ids:
 
 
 def get_best(i):
+	i = i.replace('/','.')
+	i = i[1:]
 	return math.log(facts[i]) * scores[i]
 
 #best matches are filtered based on the entity type
