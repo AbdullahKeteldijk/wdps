@@ -105,7 +105,7 @@ try:
 		SELECT DISTINCT ?same 
 		WHERE 
 		{
-		?s owl:sameAs fbase:%s .
+		?s owl:sameAs %s .
 		{ ?s owl:sameAs ?same .} UNION { ?same owl:sameAs ?s .}
 		}
 		"""
@@ -157,32 +157,32 @@ try:
 
 			i = i.replace('/','.')
 			i = i[1:]
-			if tag == PERSON:
-				response = requests.post(TRIDENT_URL, data={'print': True, 'query': personEntity_same_as_template % i})
-				if response:
-					response = response.json()
-					for binding in response.get('results', {}).get('bindings', []):
-						print(' =', binding.get('same', {}).get('value', None))
-
-			elif tag == ORGANISATION:
-				response = requests.post(TRIDENT_URL, data={'print': True, 'query': organisationEntity_same_as_template % i})
-				if response:
-					response = response.json()
-					for binding in response.get('results', {}).get('bindings', []):
-						print(' =', binding.get('same', {}).get('value', None))
-
-			elif tag == LOCATION:
-				response = requests.post(TRIDENT_URL, data={'print': True, 'query': locationEntity_same_as_template % i})
-				if response:
-					response = response.json()
-					for binding in response.get('results', {}).get('bindings', []):
-						print(' =', binding.get('same', {}).get('value', None))
-			else:
-				response = requests.post(TRIDENT_URL, data={'print': True, 'query': same_as_template % i})
-				if response:
-					response = response.json()
-					for binding in response.get('results', {}).get('bindings', []):
-						print(' =', binding.get('same', {}).get('value', None))
-			pdb.set_trace()
+			# if tag == PERSON:
+			# 	response = requests.post(TRIDENT_URL, data={'print': True, 'query': personEntity_same_as_template % i})
+			# 	if response:
+			# 		response = response.json()
+			# 		for binding in response.get('results', {}).get('bindings', []):
+			# 			print(' =', binding.get('same', {}).get('value', None))
+			#
+			# elif tag == ORGANISATION:
+			# 	response = requests.post(TRIDENT_URL, data={'print': True, 'query': organisationEntity_same_as_template % i})
+			# 	if response:
+			# 		response = response.json()
+			# 		for binding in response.get('results', {}).get('bindings', []):
+			# 			print(' =', binding.get('same', {}).get('value', None))
+			#
+			# elif tag == LOCATION:
+			# 	response = requests.post(TRIDENT_URL, data={'print': True, 'query': locationEntity_same_as_template % i})
+			# 	if response:
+			# 		response = response.json()
+			# 		for binding in response.get('results', {}).get('bindings', []):
+			# 			print(' =', binding.get('same', {}).get('value', None))
+			# else:
+			# 	response = requests.post(TRIDENT_URL, data={'print': True, 'query': same_as_template % i})
+			# 	if response:
+			# 		response = response.json()
+			# 		for binding in response.get('results', {}).get('bindings', []):
+			# 			print(' =', binding.get('same', {}).get('value', None))
+			# pdb.set_trace()
 except:
 	pdb.set_trace()
