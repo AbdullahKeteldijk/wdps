@@ -105,7 +105,7 @@ try:
 		SELECT DISTINCT ?same 
 		WHERE 
 		{
-		?s owl:sameAs fbase: %s .
+		?s owl:sameAs fbase:%s .
 		{ ?s owl:sameAs ?same .} UNION { ?same owl:sameAs ?s .}
 		}
 		"""
@@ -118,14 +118,12 @@ try:
 		#Link all results from elasticsearch to trident database.  %s in po_templare (are the unique freebase hits)
 		facts  = {}
 		n_total = 0
-		responses_total_trident =[]
 		for i in ids:
 			i = i.replace('/','.')
 			i = i[1:]
 			response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
 			if response:
 				response = response.json()
-				responses_total_trident.append(response)
 				n = int(response.get('stats',{}).get('nresults',0))
 				print(i, ':', n)
 				sys.stdout.flush()
