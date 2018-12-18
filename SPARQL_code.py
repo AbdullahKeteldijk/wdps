@@ -9,7 +9,6 @@ import math
 _, DOMAIN_TRIDENT = sys.argv
 # ELASTICSEARCH_URL			= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
 TRIDENT_URL 				= 'http://%s/sparql' % DOMAIN_TRIDENT
-TRIDENT_URL					= 'http://node020:9090/sparql'
 
 # query = 'obama' # token obtained
 #
@@ -112,12 +111,14 @@ print('Counting KB facts...')
 #Link all results from elasticsearch to trident database.  %s in po_templare (are the unique freebase hits)  
 facts  = {}
 n_total = 0
+reponses_total_trident =[]
 for i in ids:
 	i = i.replace('/','.')
 	i = i[1:]
 	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
 	if response:
 		response = response.json()
+		reponses_total_trident.append(response)
 		pdb.set_trace()
 		n = int(response.get('stats',{}).get('nresults',0))
 		print(i, ':', n)
@@ -125,6 +126,7 @@ for i in ids:
 		facts[i] = n
 		n_total = n_total+n
 
+pdb.set_trace()
 scores2=scores.copy()
 for item in scores.keys():
 	replace    		 = item.replace('/','.')
