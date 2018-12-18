@@ -128,7 +128,7 @@ for i in ids:
 scores2=scores.copy()
 for item in scores.keys():
 	replace    		 = item.replace('/','.')
-	replace 		 = item.replace('\', '.')
+	replace 		 = item.replace("\m", 'm')
 	scores[replace[1:]]  = scores.pop(item)
 pdb.set_trace()
 def get_best(i):
