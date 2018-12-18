@@ -123,7 +123,7 @@ for i in ids:
 		facts[i] = n
 		n_total = n_total+n
 
-scores2=scores
+scores2=scores.copy()
 for item in scores.keys():
 	replace    		 = item.replace('/','.')
 	replace 		 = replace[1:]
