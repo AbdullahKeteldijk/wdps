@@ -16,7 +16,7 @@ with open('TestQuery.csv', 'r') as csvfile:
 	queries = csv.reader(csvfile)
 	queries = list(queries)
 
-for i in range(len(queries)):
+for index in range(len(queries)):
 	query = queries[i][0] # token obtained
 
 	print('Searching for "%s"...' % query)
@@ -157,7 +157,7 @@ for i in range(len(queries)):
 
 	sys.stdout.flush()
 	#look which entity it is to choose the suited SPARQL query , tag = NER tag
-	tag = queries[i][1]
+	tag = queries[index][1]
 
 	if tag == PERSON:
 		response = requests.post(TRIDENT_URL, data={'print': True, 'query': personEntity_same_as_template % i})
