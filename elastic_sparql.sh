@@ -24,17 +24,28 @@ echo "elasticsearch should be running now on node $ES_NODE:$ES_PORT (connected t
 # python3 elasticsearch.py $ES_NODE:$ES_PORT "Vrije Universiteit Amsterdam"
 
 # kill $ES_PID
-
 KB_PORT=9090
 KB_BIN=/home/bbkruit/scratch/trident/build/trident
 KB_PATH=/home/jurbani/data/motherkb-trident
 
 prun -o .kb_log -v -np 1 $KB_BIN server -i $KB_PATH --port $KB_PORT </dev/null 2> .kb_node &
 echo "waiting 5 seconds for trident to set up..."
+until [ -n "$KB_NODE" ]; do KB_NODE=$(cat .kb_node | grep '^:' | grep -oP '(node...)'); done
 sleep 5
-KB_NODE=$(cat .kb_node | grep '^:' | grep -oP '(node...)')
 KB_PID=$!
 echo "trident should be running now on node $KB_NODE:$KB_PORT (connected to process $KB_PID)"
+
+### OLD TRIDENT URL CODE ###
+# KB_PORT=9090
+# KB_BIN=/home/bbkruit/scratch/trident/build/trident
+# KB_PATH=/home/jurbani/data/motherkb-trident
+
+# prun -o .kb_log -v -np 1 $KB_BIN server -i $KB_PATH --port $KB_PORT </dev/null 2> .kb_node &
+# echo "waiting 5 seconds for trident to set up..."
+# sleep 5
+# KB_NODE=$(cat .kb_node | grep '^:' | grep -oP '(node...)')
+# KB_PID=$!
+# echo "trident should be running now on node $KB_NODE:$KB_PORT (connected to process $KB_PID)"
 
 # python3 sparql.py $KB_NODE:$KB_PORT "select * where {?s ?p ?o} limit 10"
 # python3 sparql.py $KB_NODE:$KB_PORT "select * where {<http://rdf.freebase.com/ns/m.01cx6d_> ?p ?o} limit 100"
