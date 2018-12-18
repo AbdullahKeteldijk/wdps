@@ -122,7 +122,8 @@ for i in ids:
 		sys.stdout.flush()
 		facts[i] = n
 		n_total = n_total+n
-		
+
+scores2=scores
 for item in scores.keys():
 	replace    		 = item.replace('/','.')
 	replace 		 = replace[1:]
