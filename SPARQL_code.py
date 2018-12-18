@@ -69,7 +69,7 @@ try:
 		WHERE
 		{
 		?person wdt:P31 wd:Q5 .       #where ?person isa(wdt:P31) human(wd:Q5)
-		?s owl:sameAs %s .
+		?s owl:sameAs fbase:%s .
 		{ ?s owl:sameAs ?person .} UNION { ?person owl:sameAs ?s .}
 		}
 		"""
@@ -82,7 +82,7 @@ try:
 		{
 		?organisation wdt:P31 wd:Q43229. #organisation(Q43229) (collective goal)
 		?organisation2 wdt:P31 wd:Q2029841. #organisation(Q2029841) (economical concept)
-		?s owl:sameAs %s .
+		?s owl:sameAs fbase:%s .
 		{ ?s owl:sameAs ?organisation . OR ?s owl:sameAs ?organisation . } UNION { ?organisation  owl:sameAs ?s . OR ?organisation2  owl:sameAs ?s .}
 		}
 		"""
@@ -94,7 +94,7 @@ try:
 		WHERE 
 		{
 		?location wdt:P31 wd:Q17334923. #where ?location isA location(Q17334923)
-		?s owl:sameAs %s .
+		?s owl:sameAs fbase:%s .
 		{ ?s owl:sameAs ?location .} UNION { ?location owl:sameAs ?s .}
 		}
 		"""
@@ -105,7 +105,7 @@ try:
 		SELECT DISTINCT ?same 
 		WHERE 
 		{
-		?s owl:sameAs %s .
+		?s owl:sameAs fbase:%s .
 		{ ?s owl:sameAs ?same .} UNION { ?same owl:sameAs ?s .}
 		}
 		"""
