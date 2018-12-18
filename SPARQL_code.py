@@ -125,24 +125,24 @@ for i in ids:
 		facts[i] = n
 		n_total = n_total+n
 
-scores2=scores.copy()
 translate = {}
 # Replacing / in freebase ID's in scores dict
-for k, v in scores.items():
-	new_key = k.replace('/','.')
-	new_key = new_key[1:]
+for k, v in facts.items():
+	new_key = k.replace('.','/')
+	new_key = '/' + new_key
 	translate[k] = new_key
 
 for old, new in translate.items():
-    scores[new] = scores.pop(old)
+    facts[new] = facts.pop(old)
 
-pdb.set_trace()
 def get_best(i):
 	return math.log(facts[i]) * scores[i]
 
 #best matches are filtered based on the entity type
+
 print('Best matches:')
 for i in sorted(ids, key=get_best, reverse=True)[:3]:
+	pdb.set_trace()
 	print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
 
 # the normalized score, which we will use when ranking the obtained entities
