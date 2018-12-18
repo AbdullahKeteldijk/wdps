@@ -126,10 +126,16 @@ for i in ids:
 		n_total = n_total+n
 
 scores2=scores.copy()
-for item in scores.keys():
-	replace    		 = item.replace('/','.')
-	# replace 		 = item.replace("\m", 'm')
-	scores[replace[1:]]  = scores[item]
+translate = {}
+# Replacing / in freebase ID's in scores dict
+for k, v in scores.items():
+	new_key = k.replace('/','.')
+	new_key = new_key[1:]
+	translate[k] = new_key
+
+for old, new in translate.items():
+    scores[new] = scores.pop(old)
+
 pdb.set_trace()
 def get_best(i):
 	return math.log(facts[i]) * scores[i]
