@@ -153,7 +153,6 @@ try:
 
 		for i in sorted(ids, key=get_best, reverse=True)[:3]:
 			print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
-			pdb.set_trace()
 			sys.stdout.flush()
 			#look which entity it is to choose the suited SPARQL query , tag = NER tag
 			tag = queries[index][1]
@@ -186,5 +185,6 @@ try:
 					response = response.json()
 					for binding in response.get('results', {}).get('bindings', []):
 						print(' =', binding.get('same', {}).get('value', None))
+			pdb.set_trace()
 except:
 	pdb.set_trace()
