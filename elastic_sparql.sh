@@ -37,7 +37,7 @@ KB_PID=$!
 echo "trident should be running now on node $KB_NODE:$KB_PORT (connected to process $KB_PID)"
 
 # python3 sparql.py $KB_NODE:$KB_PORT "select * where {?s ?p ?o} limit 10"
-python3 sparql.py $KB_NODE:$KB_PORT "select * where {<http://rdf.freebase.com/ns/m.01cx6d_> ?p ?o} limit 100"
+#python3 sparql.py $KB_NODE:$KB_PORT "select * where {<http://rdf.freebase.com/ns/m.01cx6d_> ?p ?o} limit 100"
 
 # python3 sparql.py $KB_NODE:$KB_PORT "select * where {?s <http://www.w3.org/2002/07/owl#sameAs> <http://rdf.freebase.com/ns/m.0k3p> . ?s <http://www.w3.org/2002/07/owl#sameAs> ?o .}"
 
