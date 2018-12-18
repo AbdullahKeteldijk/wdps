@@ -119,7 +119,6 @@ for i in ids:
 	if response:
 		response = response.json()
 		reponses_total_trident.append(response)
-		pdb.set_trace()
 		n = int(response.get('stats',{}).get('nresults',0))
 		print(i, ':', n)
 		sys.stdout.flush()
