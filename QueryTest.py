@@ -186,5 +186,6 @@ try:
 					response = response.json()
 					for binding in response.get('results', {}).get('bindings', []):
 						print(' =', binding.get('same', {}).get('value', None))
+			pdb.set_trace()
 except:
 	pdb.set_trace()
