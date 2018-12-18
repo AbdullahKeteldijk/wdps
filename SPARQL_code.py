@@ -105,7 +105,7 @@ try:
 		SELECT DISTINCT ?same 
 		WHERE 
 		{
-		?s owl:sameAs %s .
+		?s owl:sameAs fbase: %s .
 		{ ?s owl:sameAs ?same .} UNION { ?same owl:sameAs ?s .}
 		}
 		"""
@@ -184,7 +184,7 @@ try:
 			else:
 				response = requests.post(TRIDENT_URL, data={'print': True, 'query': same_as_template % i})
 				if response:
-					# response = response.json()
+					response = response.json()
 					for binding in response.get('results', {}).get('bindings', []):
 						print(' =', binding.get('same', {}).get('value', None))
 except:
