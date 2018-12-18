@@ -124,10 +124,10 @@ for i in ids:
 		n_total = n_total+n
 		
 for item in scores.keys():
-	pdb.set_trace()
-	score[item] = item.replace('/','.')
-	score[item] = item[1:]
-
+	replace    		 = item.replace('/','.')
+	replace 		 = replace[1:]
+	scores[replace]  = scores.pop(item)
+pdb.set_trace()
 def get_best(i):
 	return math.log(facts[i]) * scores[i]
 
