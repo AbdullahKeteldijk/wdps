@@ -52,7 +52,7 @@ echo "trident should be running now on node $KB_NODE:$KB_PORT (connected to proc
 
 # python3 sparql.py $KB_NODE:$KB_PORT "select * where {?s <http://www.w3.org/2002/07/owl#sameAs> <http://rdf.freebase.com/ns/m.0k3p> . ?s <http://www.w3.org/2002/07/owl#sameAs> ?o .}"
 
-python SPARQL_code.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT
+python QueryTest.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT
 
 #kill $KB_PID
 #kill $ES_PID
