@@ -9,7 +9,7 @@ import math
 _, DOMAIN_TRIDENT = sys.argv
 # ELASTICSEARCH_URL			= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
 TRIDENT_URL 				= 'http://%s/sparql' % DOMAIN_TRIDENT
-pdb.set_trace()
+
 # query = 'obama' # token obtained
 #
 # print('Searching for "%s"...' % query)
