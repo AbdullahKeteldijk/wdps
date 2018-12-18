@@ -125,16 +125,11 @@ for i in ids:
 		facts[i] = n
 		n_total = n_total+n
 
-with open('trident_total.json', 'w') as f:
-    for item in responses_total_trident:
-        f.write("%s\n" % item)
-
-pdb.set_trace()
 scores2=scores.copy()
 for item in scores.keys():
 	replace    		 = item.replace('/','.')
-	# replace 		 = replace[1:]
-	scores[replace]  = scores.pop(item)
+	replace 		 = item.replace('\', '.')
+	scores[replace[1:]]  = scores.pop(item)
 pdb.set_trace()
 def get_best(i):
 	return math.log(facts[i]) * scores[i]
