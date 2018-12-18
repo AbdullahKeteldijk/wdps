@@ -104,7 +104,7 @@ WHERE
 """
 
 # get the complete template for the freebase hit %s
-po_template = prefixes + "SELECT DISTINCT * WHERE {fbase: %s ?p ?o.}"
+po_template = prefixes + "SELECT DISTINCT * WHERE {fbase: %s ?p ?o.} LIMIT 10"
 # po_template = "SELECT * WHERE {<http://rdf.freebase.com/ns/%s> ?p ?o} LIMIT 100"
 
 print('Counting KB facts...')
@@ -128,6 +128,7 @@ for i in ids:
 def get_best(i):
 	i = i.replace('/','.')
 	i = i[1:]
+	pdb.set_trace()
 	return math.log(facts[i]) * scores[i]
 
 #best matches are filtered based on the entity type
@@ -137,7 +138,6 @@ for i in sorted(ids, key=get_best, reverse=True)[:3]:
 
 # the normalized score, which we will use when ranking the obtained entities
 norm_score = facts[i]/n_total
-pdb.set_trace()
 sys.stdout.flush()
 #look which entity it is to choose the suited SPARQL query , tag = NER tag 
 if tag == PERSON:
