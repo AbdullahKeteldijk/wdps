@@ -111,19 +111,23 @@ print('Counting KB facts...')
 #Link all results from elasticsearch to trident database.  %s in po_templare (are the unique freebase hits)  
 facts  = {}
 n_total = 0
-reponses_total_trident =[]
+responses_total_trident =[]
 for i in ids:
 	i = i.replace('/','.')
 	i = i[1:]
 	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
 	if response:
 		response = response.json()
-		reponses_total_trident.append(response)
+		responses_total_trident.append(response)
 		n = int(response.get('stats',{}).get('nresults',0))
 		print(i, ':', n)
 		sys.stdout.flush()
 		facts[i] = n
 		n_total = n_total+n
+
+with open('trident_total.json', 'w') as f:
+    for item in responses_total_trident:
+        f.write("%s\n" % item)
 
 pdb.set_trace()
 scores2=scores.copy()
