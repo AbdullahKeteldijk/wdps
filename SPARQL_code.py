@@ -17,7 +17,7 @@ with open('TestQuery.csv', 'r') as csvfile:
 	queries = list(queries)
 
 for index in range(len(queries)):
-	query = queries[i][0] # token obtained
+	query = queries[index][0] # token obtained
 
 	print('Searching for "%s"...' % query)
 	#looking for queries that we get from the token with elasticsearch
