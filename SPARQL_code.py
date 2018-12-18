@@ -9,6 +9,7 @@ import math
 _, DOMAIN_TRIDENT = sys.argv
 # ELASTICSEARCH_URL			= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
 TRIDENT_URL 				= 'http://%s/sparql' % DOMAIN_TRIDENT
+TRIDENT_URL					= 'http://node020:9090/sparql'
 
 # query = 'obama' # token obtained
 #
