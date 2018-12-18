@@ -16,7 +16,7 @@ with open('TestQuery.csv', 'r') as csvfile:
 	queries = csv.reader(csvfile)
 	queries = list(queries)
 
-for i range(len(queries)):
+for i in range(len(queries)):
 	query = queries[i][0] # token obtained
 
 	print('Searching for "%s"...' % query)
