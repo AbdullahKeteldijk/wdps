@@ -124,6 +124,7 @@ for i in ids:
 		n_total = n_total+n
 		
 for item in scores.keys():
+	pdb.set_trace()
 	replace    		 = item.replace('/','.')
 	replace 		 = replace[1:]
 	scores[replace]  = scores.pop(item)
