@@ -153,12 +153,11 @@ try:
 
 		for i in sorted(ids, key=get_best, reverse=True)[:3]:
 			print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
+			pdb.set_trace()
+			sys.stdout.flush()
+			#look which entity it is to choose the suited SPARQL query , tag = NER tag
+			tag = queries[index][1]
 
-
-		sys.stdout.flush()
-		#look which entity it is to choose the suited SPARQL query , tag = NER tag
-		tag = queries[index][1]
-		for i in ids:
 			i = i.replace('/','.')
 			i = i[1:]
 			if tag == PERSON:
