@@ -136,13 +136,14 @@ for old, new in translate.items():
     facts[new] = facts.pop(old)
 
 def get_best(i):
-	return math.log(facts[i]) * scores[i]
+	return math.log(facts[i]+0.0000001) * scores[i] # Avoid math errors
 
 #best matches are filtered based on the entity type
 
 print('Best matches:')
+pdb.set_trace()
+
 for i in sorted(ids, key=get_best, reverse=True)[:3]:
-	pdb.set_trace()
 	print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
 
 # the normalized score, which we will use when ranking the obtained entities
