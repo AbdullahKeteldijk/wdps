@@ -117,6 +117,7 @@ for i in ids:
 	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
 	if response:
 		response = response.json()
+		pdb.set_trace()
 		n = int(response.get('stats',{}).get('nresults',0))
 		print(i, ':', n)
 		sys.stdout.flush()
