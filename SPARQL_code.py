@@ -268,6 +268,6 @@ try:
 						print(' =', binding.get('same', {}).get('value', None))
 			pdb.set_trace()
 			"""
-	except Exception as e:
-		print(e)
-		pdb.set_trace()
+except Exception as e:
+	print(e)
+	pdb.set_trace()
