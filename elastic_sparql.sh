@@ -14,18 +14,20 @@ ES_PORT=9200
 ES_BIN=$(realpath ~/scratch/elasticsearch-2.4.1/bin/elasticsearch)
 
 >.es_log*
-prun -o .es_log -v -np 1 ESPORT=$ES_PORT $ES_BIN </dev/null 2> .es_node &
+prun -o .es_log -v -np 1 ESPORT=$ES_PORT1 $ES_BIN </dev/null 2> .es_node &
 echo "waiting for elasticsearch1 to set up..."
 until [ -n "$ES_NODE1" ]; do ES_NODE1=$(cat .es_node | grep '^:' | grep -oP '(node...)'); done
 ES_PID1=$!
 until [ -n "$(cat .es_log* | grep YELLOW)" ]; do sleep 1; done
 echo "elasticsearch1 should be running now on node $ES_NODE1:$ES_PORT1 (connected to process $ES_PID1)" &
+
+prun -o .es_log -v -np 1 ESPORT=$ES_PORT2 $ES_BIN </dev/null 2> .es_node &
 echo "waiting for elasticsearch2 to set up..."
 until [ -n "$ES_NODE2" ]; do ES_NODE2=$(cat .es_node | grep '^:' | grep -oP '(node...)'); done
 ES_PID2=$!
 until [ -n "$(cat .es_log* | grep YELLOW)" ]; do sleep 1; done
 echo "elasticsearch2 should be running now on node $ES_NODE2:$ES_PORT2 (connected to process $ES_PID2)" &
-wait
+
 
 # python3 elasticsearch.py $ES_NODE:$ES_PORT "Vrije Universiteit Amsterdam"
 
