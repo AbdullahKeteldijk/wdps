@@ -163,7 +163,8 @@ try:
 
 		##################################################
 
-
+		ids = list(ids)
+		print("I was here")
 		dict = threaded_process_range(3,ids)
 		for id in ids:
 			response = dict[id]
