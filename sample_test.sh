@@ -12,7 +12,7 @@
 # "${SPARK_HOME}/sbin"/start-slaves.sh
 
 SCRIPT=${1:-"EntityRecognition5.py"}
-INFILE=${2:-"hdfs:///user/bbkruit/sample.warc.gz"}
+INFILE=${2:-"hdfs:///user/bbkruit/CommonCrawl-sample.warc.gz"}
 # STANFORD=${3:-"/home/wdps1813/scratch/wdps1813/wdps/stanford-ner-2017-06-09"}
 # OUTFILE=${4:-"folder"}
 
