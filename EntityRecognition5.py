@@ -173,7 +173,7 @@ def decode(x, record_attribute):
 record_attribute = sys.argv[1]
 # Here we use a smaller testfile due to computation time. Use the sample.war.gz for real testing.
 in_file = sys.argv[2] #"C:/Users/klm85310/Documents/WDPS/testing.warc.gz"
-stanford =  sys.argv[3] #'/home/wdps1813/scratch/wdps1813/wdps/stanford-ner-2017-06-09'
+stanford =  '/home/wdps1813/scratch/wdps1813/wdps/stanford-ner-2017-06-09'
 
 # Create Spark Context -- Remove this when running on cluster
 # sc = SparkContext.getOrCreate()
