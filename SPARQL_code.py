@@ -152,7 +152,7 @@ try:
 			# create the threads
 			for i in range(nthreads):
 				id = ids[i]
-				t = Thread(target=process_range, args=(id, store))
+				t = Thread(target=process_id, args=(id, store))
 				threads.append(t)
 
 			# start the threads
