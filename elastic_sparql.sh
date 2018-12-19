@@ -20,13 +20,13 @@ until [ -n "$ES_NODE1" ]; do ES_NODE1=$(cat .es_node | grep '^:' | grep -oP '(no
 ES_PID1=$!
 until [ -n "$(cat .es_log* | grep YELLOW)" ]; do sleep 1; done
 echo "elasticsearch1 should be running now on node $ES_NODE1:$ES_PORT1 (connected to process $ES_PID1)" &
-
 echo "waiting for elasticsearch2 to set up..."
 until [ -n "$ES_NODE2" ]; do ES_NODE2=$(cat .es_node | grep '^:' | grep -oP '(node...)'); done
 ES_PID2=$!
 until [ -n "$(cat .es_log* | grep YELLOW)" ]; do sleep 1; done
-echo "elasticsearch2 should be running now on node $ES_NODE2:$ES_PORT2 (connected to process $ES_PID)"
+echo "elasticsearch2 should be running now on node $ES_NODE2:$ES_PORT2 (connected to process $ES_PID2)" &
 wait
+
 # python3 elasticsearch.py $ES_NODE:$ES_PORT "Vrije Universiteit Amsterdam"
 
 # kill $ES_PID
