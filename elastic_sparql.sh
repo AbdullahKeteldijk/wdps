@@ -55,4 +55,6 @@ echo "trident should be running now on node $KB_NODE:$KB_PORT (connected to proc
 # python SPARQL_code.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT
 # kill $KB_PID
 # kill $ES_PID
-PYSPARK_PYTHON=C:\Users\ruben\Documents\WDPS_2018\pyspark-2.4.0.tar.gz ~/spark-2.1.2-bin-without-hadoop/bin/spark-submit --master yarn SPARQL_code.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT
+#PYSPARK_PYTHON=C:\Users\ruben\Documents\WDPS_2018\pyspark-2.4.0.tar.gz ~/spark-2.1.2-bin-without-hadoop/bin/spark-submit --master yarn SPARQL_code.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT
+
+PYSPARK_PYTHON=C:\Users\ruben\Documents\WDPS_2018\pyspark-2.4.0.tar.gz /home/wdps1813/temp/spark-2.1.2-bin-without-hadoop/bin/spark-submit --master yarn SPARQL_code.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT
