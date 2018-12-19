@@ -36,5 +36,5 @@
 
 time python3 EntityRecognition5.py <(hdfs dfs -cat hdfs:///user/bbkruit/sample.warc.gz | zcat) 
 
-python3 --executor-memory 5g --num-executors 20 --conf spark.memory.fraction=0.8 --conf spark.yarn.am.memory=6g \
+python3 --executor-memory 5g --num-executors 40 --conf spark.memory.fraction=0.8 --conf spark.yarn.am.memory=6g \
 --master yarn-cluster 
