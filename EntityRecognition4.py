@@ -5,6 +5,7 @@ from nltk.tokenize import word_tokenize
 import nltk
 import re
 import sys
+import csv
 from io import BytesIO,StringIO
 from warcio.archiveiterator import ArchiveIterator
 
@@ -138,8 +139,16 @@ def get_candidate_entities(input, st):
     # #
     #
     output = list(set(output))
-    print('output: ', output)
-    return output
+    # print('output: ', output)
+
+
+
+
+    with open('Output/sample-output' +input[0][12:-1]+ '.csv', 'w', newline='') as myfile:
+        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+        wr.writerow(output)
+    print("doc: ", input[0])
+    return []
 
 
 
@@ -223,7 +232,7 @@ conf = SparkConf().setAppName("Entity Recognition").setMaster("local[*]")
 sc = SparkContext(conf = conf,
             serializer = PickleSerializer(),  # Default serializer
              # Unlimited batch size -> BatchedSerializer instead of AutoBatchedSerializer
-            batchSize = -10)
+            batchSize = 64)
 
 st = StanfordNERTagger(stanford + '/classifiers/english.all.3class.distsim.crf.ser.gz',
                        stanford + '/stanford-ner.jar',
@@ -243,8 +252,8 @@ print("step 2")
 # Extract named Entities
 candidate_entities = rdd_html_cleaned.map(lambda x: get_candidate_entities(x, st))
 # stanford_rdd = rdd_html_cleaned.map(lambda x: ner_spacy(x))
-# print(stanford_rdd.collect())
+print(candidate_entities.collect())
 
 #print(stanford_rdd.collect())
-candidate_entities.saveAsTextFile('Entities_with_POS_complete.csv')
+# candidate_entities.saveAsTextFile('Entities_with_POS_complete4.csv')
 print('Done')
