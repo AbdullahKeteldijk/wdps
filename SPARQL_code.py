@@ -133,12 +133,11 @@ try:
 			return response.json()
 
 
-		def process_range(ids, store=None):
+		def process_range(id, store=None):
 			"""process a number of ids, storing the results in a dict"""
 			if store is None:
 				store = {}
-			for id in ids:
-				store[id] = process_id(id)
+			store[id] = process_id(id)
 			return store
 
 
@@ -152,7 +151,7 @@ try:
 			# create the threads
 			for i in range(nthreads):
 				id = ids[i]
-				t = Thread(target=process_id, args=(id, store))
+				t = Thread(target=process_range, args=(id, store))
 				threads.append(t)
 
 			# start the threads
