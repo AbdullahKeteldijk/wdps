@@ -11,8 +11,8 @@
 # # Start Workers
 # "${SPARK_HOME}/sbin"/start-slaves.sh
 
-# SCRIPT=${1:-"EntityRecognition5.py"}
-# INFILE=${2:-"hdfs:///user/bbkruit/CommonCrawl-sample.warc.gz"}
+SCRIPT=${1:-"EntityRecognition5.py"}
+INFILE=${2:-"hdfs:///user/bbkruit/CommonCrawl-sample.warc.gz"}
 # STANFORD=${3:-"/home/wdps1813/scratch/wdps1813/wdps/stanford-ner-2017-06-09"}
 # OUTFILE=${4:-"folder"}
 
@@ -25,6 +25,10 @@
 
 # ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit --class Spark.SparkScript --executor-memory 5g --num-executors 20 --conf spark.memory.fraction=0.8 --conf spark.yarn.am.memory=6g --master yarn --master yarn-cluster --executor-memory 5g --num-executors 20
 
-PYSPARK_PYTHON=~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit --executor-memory 5g --num-executors 20 \
---conf spark.memory.fraction=0.8 --conf spark.yarn.am.memory=6g --master yarn \ 
-EntityRecognition5.py
+PYSPARK_PYTHON=~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit 
+--executor-memory 5g \
+--num-executors 20 \
+--conf spark.memory.fraction=0.8 \
+--conf spark.yarn.am.memory=6g \
+--master yarn-cluster \ 
+$SCRIPT $INFILE
