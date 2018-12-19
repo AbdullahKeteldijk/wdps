@@ -23,4 +23,4 @@
 # hdfs dfs -cat $OUTFILE"/*" > $OUTFILE
 time python3 EntityRecognition5.py <(hdfs dfs -cat hdfs:///user/bbkruit/sample.warc.gz | zcat)
 
-python3 --master yarn
+python3 --master yarn-cluster
