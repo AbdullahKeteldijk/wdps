@@ -14,3 +14,9 @@ fi
 SCRIPT=${1:-"EntityRecognition5.py"}
 INFILE=${2:-"/home/wdps1813/scratch/wdps1813/wdps/data/sample.warc.gz"}
 OUTFILE=${3:-"sample"}
+
+
+PYSPARK_PYTHON=$(readlink -f $(which python)) ~/local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
+--master yarn $SCRIPT $INFILE $OUTFILE
+
+hdfs dfs -cat $OUTFILE"/*" > $OUTFILE
