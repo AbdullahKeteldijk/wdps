@@ -168,9 +168,9 @@ try:
 
 		import time
 		# import matplotlib as plt
-		id_range = range(100)
+
 		tic = time.time()
-		reference = process_range(id_range)
+		reference = process_range(ids)
 		reftime = time.time() - tic
 		print(1, reftime)
 
@@ -178,7 +178,7 @@ try:
 		tlist = [reftime]
 		for nthreads in nlist[1:]:
 			tic = time.time()
-			ans = threaded_process_range(nthreads, id_range)
+			ans = threaded_process_range(nthreads, ids)
 			toc = time.time()
 			print(nthreads, toc - tic)
 			assert ans == reference
