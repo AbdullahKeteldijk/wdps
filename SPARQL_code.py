@@ -178,7 +178,7 @@ try:
 		# Replacing / in freebase ID's in scores dict
 		for k, v in facts.items():
 			new_key = k.replace('.', '/')
-			new_key = '/' + new_key
+			# new_key = '/' + new_key
 			translate[k] = new_key
 
 		for old, new in translate.items():
