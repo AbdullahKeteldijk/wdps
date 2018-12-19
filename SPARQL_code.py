@@ -168,7 +168,7 @@ for index in range(len(queries)):
 
 	dict = threaded_process_range(64,ids)
 	for i in ids:
-  		response = dict[i]
+		response = dict[i]
 		n = int(response.get('stats', {}).get('nresults', 0))
 		print(i, ':', n)
 		sys.stdout.flush()
