@@ -172,7 +172,7 @@ def decode(x, record_attribute):
 
 record_attribute = 'WARC-Record-ID'
 # Here we use a smaller testfile due to computation time. Use the sample.war.gz for real testing.
-in_file =  'hdfs:///user/bbkruit/CommonCrawl-sample.warc.gz' # 'hdfs:///user/bbkruit/sample.warc.gz' #"/home/wdps1813/scratch/wdps1813/wdps/data/testing.warc.gz"
+in_file =  'hdfs:///user/bbkruit/sample.warc.gz' # 'hdfs:///user/bbkruit/sample.warc.gz' #"/home/wdps1813/scratch/wdps1813/wdps/data/testing.warc.gz"
 stanford =  '/home/wdps1813/scratch/wdps1813/wdps/stanford-ner-2017-06-09'
 
 # Create Spark Context -- Remove this when running on cluster
