@@ -185,7 +185,7 @@ stanford = 'C:/Users/klm85310/Documents/WDPS/stanford-ner-2017-06-09/stanford-ne
 # Create Spark Context -- Remove this when running on cluster
 # sc = SparkContext.getOrCreate()
 
-conf = SparkConf().setAppName("Entity Recognition").setMaster("local[*]")
+conf = SparkConf().setAppName("Entity Recognition")#.setMaster("local[*]")
 sc = SparkContext(conf = conf,
             serializer = PickleSerializer(),  # Default serializer
              # Unlimited batch size -> BatchedSerializer instead of AutoBatchedSerializer
