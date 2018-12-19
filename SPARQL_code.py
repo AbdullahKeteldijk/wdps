@@ -171,7 +171,7 @@ try:
 			response = dict[i]
 			n = int(response.get('stats', {}).get('nresults', 0))
 			print(i, ':', n)
-			sys.stdout.flush()
+			# sys.stdout.flush()
 			facts[i] = n
 			n_total = n_total + n
 
