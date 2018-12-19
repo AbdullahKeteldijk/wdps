@@ -94,7 +94,7 @@ def get_candidate_entities(input, st):
     output = list(set(output))
 
     with open('folder/sample-output' +input[0][12:-1]+ '.csv', 'w', newline='') as myfile:
-        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL, delimiter=';')
         wr.writerow(output)
     print("doc: ", input[0])
 
