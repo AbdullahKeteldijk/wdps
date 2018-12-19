@@ -23,4 +23,4 @@
 # hdfs dfs -cat $OUTFILE"/*" > $OUTFILE
 time python3 EntityRecognition5.py <(hdfs dfs -cat hdfs:///user/bbkruit/sample.warc.gz | zcat)
 
-python3 --master yarn-cluster --executor-memory 5g --num-executors 20
+python3 --class Spark.SparkScript --executor-memory 5g --num-executors 20 --conf spark.memory.fraction=0.8 --conf spark.yarn.am.memory=6g --master yarn --master yarn-cluster --executor-memory 5g --num-executors 20
