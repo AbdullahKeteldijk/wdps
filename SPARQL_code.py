@@ -166,34 +166,9 @@ for index in range(len(queries)):
 	ids = list(ids)
 	print("I was here")
 
-	import time
-	# import matplotlib as plt
-
-	tic = time.time()
-	reference = process_range(ids)
-	reftime = time.time() - tic
-	print(1, reftime)
-
-	nlist = [1, 2, 4, 8, 16, 32, 64]
-	tlist = [reftime]
-	for nthreads in nlist[1:]:
-		tic = time.time()
-		ans = threaded_process_range(nthreads, ids)
-		toc = time.time()
-		print(nthreads, toc - tic)
-		assert ans == reference
-		tlist.append(toc - tic)
-
-	# plt.loglog(nlist, [len(id_range) / t for t in tlist], '-o')
-	# plt.xlabel("n threads")
-	# plt.ylabel("requests / sec");
-
-
-	pdb.set_trace()
-	dict = threaded_process_range(10,ids)
+	dict = threaded_process_range(64,ids)
 	for i in ids:
-		pdb.set_trace()
-		response = dict[id]
+  		response = dict[i]
 		n = int(response.get('stats', {}).get('nresults', 0))
 		print(i, ':', n)
 		sys.stdout.flush()
