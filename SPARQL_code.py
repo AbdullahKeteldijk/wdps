@@ -118,6 +118,90 @@ try:
 		#Link all results from elasticsearch to trident database.  %s in po_templare (are the unique freebase hits)
 		facts  = {}
 		n_total = 0
+
+
+		### Parallel Utils ###
+
+		def process_id(id):
+			"""process a single ID"""
+			# and update some data with PUT
+			# requests.put(url_t % id, data=data)
+			id = id.replace('/', '.')
+			id = id[1:]
+			response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % id})
+
+			return response.json()
+
+
+		def process_range(ids, store=None):
+			"""process a number of ids, storing the results in a dict"""
+			if store is None:
+				store = {}
+			for id in ids:
+				store[id] = process_id(id)
+			return store
+
+
+		from threading import Thread
+
+
+		def threaded_process_range(nthreads, ids):
+			"""process the id range in a specified number of threads"""
+			store = {}
+			threads = []
+			# create the threads
+			for i in range(nthreads):
+				ids = ids[i::nthreads]
+				t = Thread(target=process_range, args=(ids, store))
+				threads.append(t)
+
+			# start the threads
+			[t.start() for t in threads]
+			# wait for the threads to finish
+			[t.join() for t in threads]
+			return store
+
+		##################################################
+
+
+		dict = threaded_process_range(3,ids)
+		for id in ids:
+			response = dict[id]
+			n = int(response.get('stats', {}).get('nresults', 0))
+			print(i, ':', n)
+			sys.stdout.flush()
+			facts[i] = n
+			n_total = n_total + n
+
+		translate = {}
+		# Replacing / in freebase ID's in scores dict
+		for k, v in facts.items():
+			new_key = k.replace('.', '/')
+			new_key = '/' + new_key
+			translate[k] = new_key
+
+		for old, new in translate.items():
+			facts[new] = facts.pop(old)
+
+
+		# the normalized score, which we will use when ranking the obtained entities
+		def get_best(i):
+			norm_score = facts[i] / n_total
+			return math.log(norm_score + 0.0000001) * scores[i]  # Avoid math errors
+
+
+		# best matches are filtered based on the entity type
+
+		print('Best matches:')
+
+		for i in sorted(ids, key=get_best, reverse=True)[:3]:
+			print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]))
+			sys.stdout.flush()
+
+
+
+		pdb.set_trace()
+		"""
 		for i in ids:
 			i = i.replace('/','.')
 			i = i[1:]
@@ -184,5 +268,6 @@ try:
 					for binding in response.get('results', {}).get('bindings', []):
 						print(' =', binding.get('same', {}).get('value', None))
 			pdb.set_trace()
+			"""
 except:
 	pdb.set_trace()
