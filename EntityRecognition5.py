@@ -8,13 +8,6 @@ import sys
 import csv
 from io import BytesIO,StringIO
 from warcio.archiveiterator import ArchiveIterator
-
-import spacy
-from spacy import displacy
-from collections import Counter
-import en_core_web_sm
-
-import nltk
 from nltk.collocations import *
 
 from bs4 import BeautifulSoup
