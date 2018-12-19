@@ -167,28 +167,26 @@ try:
 		print("I was here")
 
 		import time
-		import matplotlib as plt
+		# import matplotlib as plt
 		id_range = range(100)
 		tic = time.time()
-		reference = process_id_range(id_range)
+		reference = process_range(id_range)
 		reftime = time.time() - tic
-		print
-		1, reftime
+		print(1, reftime)
 
 		nlist = [1, 2, 4, 8, 16, 32, 64]
 		tlist = [reftime]
 		for nthreads in nlist[1:]:
 			tic = time.time()
-			ans = threaded_process(nthreads, id_range)
+			ans = threaded_process_range(nthreads, id_range)
 			toc = time.time()
-			print
-			nthreads, toc - tic
+			print(nthreads, toc - tic)
 			assert ans == reference
 			tlist.append(toc - tic)
 
-		plt.loglog(nlist, [len(id_range) / t for t in tlist], '-o')
-		plt.xlabel("n threads")
-		plt.ylabel("requests / sec");
+		# plt.loglog(nlist, [len(id_range) / t for t in tlist], '-o')
+		# plt.xlabel("n threads")
+		# plt.ylabel("requests / sec");
 
 
 		pdb.set_trace()
