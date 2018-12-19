@@ -111,7 +111,7 @@ try:
 		"""
 
 		# get the complete template for the freebase hit %s
-		po_template = prefixes + "SELECT DISTINCT * WHERE {fbase: %s ?p ?o.} LIMIT 10"
+		po_template = prefixes + "SELECT DISTINCT * WHERE {fbase: %s ?p ?o.} LIMIT 1000"
 		# po_template = "SELECT * WHERE {<http://rdf.freebase.com/ns/%s> ?p ?o} LIMIT 100"
 
 		print('Counting KB facts...')
