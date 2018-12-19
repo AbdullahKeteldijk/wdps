@@ -52,7 +52,7 @@ echo "trident should be running now on node $KB_NODE:$KB_PORT (connected to proc
 
 # python3 sparql.py $KB_NODE:$KB_PORT "select * where {?s <http://www.w3.org/2002/07/owl#sameAs> <http://rdf.freebase.com/ns/m.0k3p> . ?s <http://www.w3.org/2002/07/owl#sameAs> ?o .}"
 
-python SPARQL_code.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT
-
-#kill $KB_PID
-#kill $ES_PID
+# python SPARQL_code.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT
+# kill $KB_PID
+# kill $ES_PID
+PYSPARK_PYTHON=C:\Users\ruben\Documents\WDPS_2018\pyspark-2.4.0.tar.gz ~/spark-2.1.2-bin-without-hadoop/bin/spark-submit --master yarn SPARQL_code.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT
