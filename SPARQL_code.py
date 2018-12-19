@@ -151,12 +151,12 @@ try:
 			threads = []
 			# create the threads
 			for i in range(nthreads):
-				ids = ids[i::nthreads]
-				t = Thread(target=process_range, args=(ids, store))
+				id = ids[i]
+				t = Thread(target=process_range, args=(id, store))
 				threads.append(t)
 
 			# start the threads
-			[t.start() for t in threads]
+			[t.start() for t in threads
 			# wait for the threads to finish
 			[t.join() for t in threads]
 			return store
@@ -166,7 +166,7 @@ try:
 		ids = list(ids)
 		print("I was here")
 
-		dict = threaded_process_range(64,ids)
+		dict = threaded_process_range(len(ids),ids)
 		for i in ids:
 			response = dict[i]
 			n = int(response.get('stats', {}).get('nresults', 0))
