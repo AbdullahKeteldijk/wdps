@@ -177,10 +177,10 @@ def decode(x, record_attribute):
 # java_path = "C:\Program Files\Java\jre1.8.0_191\binjava.exe"
 # os.environ['JAVAHOME'] = java_path
 
-record_attribute = "WARC-Record-ID"
+record_attribute = sys.argv[1]
 # Here we use a smaller testfile due to computation time. Use the sample.war.gz for real testing.
-in_file = "C:/Users/klm85310/Documents/WDPS/testing.warc.gz"
-stanford = 'C:/Users/klm85310/Documents/WDPS/stanford-ner-2017-06-09/stanford-ner-2017-06-09'
+in_file = sys.argv[2] #"C:/Users/klm85310/Documents/WDPS/testing.warc.gz"
+stanford =  sys.argv[3] #'/home/wdps1813/scratch/wdps1813/wdps/stanford-ner-2017-06-09'
 
 # Create Spark Context -- Remove this when running on cluster
 # sc = SparkContext.getOrCreate()
