@@ -25,8 +25,8 @@ INFILE=${2:-"hdfs:///user/bbkruit/CommonCrawl-sample.warc.gz"}
 
 # ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit --class Spark.SparkScript --executor-memory 5g --num-executors 20 --conf spark.memory.fraction=0.8 --conf spark.yarn.am.memory=6g --master yarn --master yarn-cluster --executor-memory 5g --num-executors 20
 
-PYSPARK_PYTHON=~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
-# --executor-memory 5g \
+PYSPARK_PYTHON=$(readlink -f $(which python)) ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
+--executor-memory 5g \
 --num-executors 20 \
 --conf spark.memory.fraction=0.8 \
 --conf spark.yarn.am.memory=6g \
