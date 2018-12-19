@@ -166,7 +166,7 @@ try:
 		ids = list(ids)
 		print("I was here")
 		dict = threaded_process_range(10,ids)
-		for id in ids:
+		for i in ids:
 			pdb.set_trace()
 			response = dict[id]
 			n = int(response.get('stats', {}).get('nresults', 0))
