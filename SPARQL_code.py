@@ -156,7 +156,7 @@ try:
 				threads.append(t)
 
 			# start the threads
-			[t.start() for t in threads
+			[t.start() for t in threads]
 			# wait for the threads to finish
 			[t.join() for t in threads]
 			return store
