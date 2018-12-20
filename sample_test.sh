@@ -41,5 +41,5 @@ python3 ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
 --num-executors 40 \
 --conf spark.memory.fraction=0.8 \
 --conf spark.yarn.am.memory=6g \
---master yarn-cluster 
+--master yarn-cluster \
 EntityRecognition6.py 
