@@ -11,6 +11,7 @@ PYSPARK_PYTHON=$(readlink -f python3) ~/../../local/spark/spark-2.4.0-bin-hadoop
 --num-executors 20 \
 --conf spark.memory.fraction=0.8 \
 --conf spark.yarn.am.memory=6g \
+--archives venv.zip#VENV \
 --master yarn --deploy-mode cluster \
 $SCRIPT
 
