@@ -9,7 +9,7 @@ import csv
 from io import BytesIO,StringIO
 from warcio.archiveiterator import ArchiveIterator
 from nltk.collocations import *
-import html5lib
+# import html5lib
 from bs4 import BeautifulSoup
 
 # nltk.download() # Use only if not yet installed
