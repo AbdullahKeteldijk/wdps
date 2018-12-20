@@ -7,9 +7,7 @@ python3 ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
 EntityRecognition6.py 
 
 
-# if [ -z "${SPARK_HOME}" ]; then
-#   export SPARK_HOME="$(cd "`dirname "$0"`"/..; pwd)"
-# fi
+
 
 # # Load the Spark configuration
 # . "${SPARK_HOME}/sbin/spark-config.sh"
