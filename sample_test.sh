@@ -1,5 +1,5 @@
-python3 ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
--- pyFiles EntityRecognition6.py \
+~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
+--pyFiles EntityRecognition6.py \
 --executor-memory 5g \
 --num-executors 40 \
 --conf spark.memory.fraction=0.8 \
