@@ -1,10 +1,11 @@
-python ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
+python3 ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
+-- class EntityRecognition6.py \
 --executor-memory 5g \
 --num-executors 40 \
 --conf spark.memory.fraction=0.8 \
 --conf spark.yarn.am.memory=6g \
 --master yarn-cluster \
-EntityRecognition6.py 
+
 
 
 
