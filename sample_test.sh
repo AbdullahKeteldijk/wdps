@@ -1,5 +1,12 @@
 SCRIPT=${1:-"EntityRecognition6.py"}
-PYSPARK_PYTHON=$(readlink -f python3) ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
+
+# This assumes there is a python virtual environment in the "venv" directory
+source venv/bin/activate
+virtualenv --relocatable venv
+zip -r venv.zip venv
+
+PYSPARK_PYTHON=$(readlink -f $(python3)) ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
+--conf spark.yarn.appMasterEnv.PYSPARK_PYTHON=./VENV/venv/bin/python3 \
 --executor-memory 5g \
 --num-executors 20 \
 --conf spark.memory.fraction=0.8 \
