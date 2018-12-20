@@ -182,7 +182,7 @@ conf = SparkConf().setAppName("Entity Recognition")#.setMaster("local[*]")
 sc = SparkContext(conf = conf,
             serializer = PickleSerializer(),  # Default serializer
              # Unlimited batch size -> BatchedSerializer instead of AutoBatchedSerializer
-            batchSize = 64)
+            batchSize = 1024)
 
 st = StanfordNERTagger(stanford + '/classifiers/english.all.3class.distsim.crf.ser.gz',
                        stanford + '/stanford-ner.jar',
