@@ -5,7 +5,7 @@ PYSPARK_PYTHON=$(readlink -f $(python3)) ~/../../local/spark/spark-2.4.0-bin-had
 --conf spark.yarn.am.memory=6g \
 --deploy-mode cluster \
 --master yarn \
-EntityRecognition6.py
+exec(open("EntityRecognition6.py").read())EntityRecognition6.py
 
 
 
