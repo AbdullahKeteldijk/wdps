@@ -1,3 +1,12 @@
+python3 ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
+--executor-memory 5g \
+--num-executors 40 \
+--conf spark.memory.fraction=0.8 \
+--conf spark.yarn.am.memory=6g \
+--master yarn-cluster \
+EntityRecognition6.py 
+
+
 # if [ -z "${SPARK_HOME}" ]; then
 #   export SPARK_HOME="$(cd "`dirname "$0"`"/..; pwd)"
 # fi
@@ -36,10 +45,3 @@
 
 # time python3 EntityRecognition5.py <(hdfs dfs -cat hdfs:///user/bbkruit/sample.warc.gz | zcat) 
 
-python3 ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
---executor-memory 5g \
---num-executors 40 \
---conf spark.memory.fraction=0.8 \
---conf spark.yarn.am.memory=6g \
---master yarn-cluster \
-EntityRecognition6.py 
