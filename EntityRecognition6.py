@@ -169,8 +169,7 @@ def decode(x, record_attribute):
 
 # java_path = "C:\Program Files\Java\jre1.8.0_191\binjava.exe"
 # os.environ['JAVAHOME'] = java_path
-import pdb
-pdb.set_trace()
+
 record_attribute = 'WARC-Record-ID'
 # Here we use a smaller testfile due to computation time. Use the sample.war.gz for real testing.
 in_file =  'hdfs:///user/bbkruit/sample.warc.gz' # 'hdfs:///user/bbkruit/sample.warc.gz' #"/home/wdps1813/scratch/wdps1813/wdps/data/testing.warc.gz"
