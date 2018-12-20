@@ -1,7 +1,7 @@
 SCRIPT=${1:-"EntityRecognition6.py"}
 PYSPARK_PYTHON=$(readlink -f python3) ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
 --executor-memory 5g \
---num-executors 40 \
+--num-executors 20 \
 --conf spark.memory.fraction=0.8 \
 --conf spark.yarn.am.memory=6g \
 --deploy-mode cluster \
