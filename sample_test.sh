@@ -2,8 +2,8 @@ SCRIPT=${1:-"EntityRecognition6.py"}
 
 # This assumes there is a python virtual environment in the "venv" directory
 source venv/bin/activate
-virtualenv --relocatable venv
-zip -r venv.zip venv
+#virtualenv --relocatable venv
+#zip -r venv.zip venv
 
 PYSPARK_PYTHON=$(readlink -f python3) ~/../../local/spark/spark-2.4.0-bin-hadoop2.7/bin/spark-submit \
 --conf spark.yarn.appMasterEnv.PYSPARK_PYTHON=./VENV/venv/bin/python3 \
