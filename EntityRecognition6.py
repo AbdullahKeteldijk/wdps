@@ -172,8 +172,8 @@ def decode(x, record_attribute):
 
 record_attribute = 'WARC-Record-ID'
 # Here we use a smaller testfile due to computation time. Use the sample.war.gz for real testing.
-in_file =  'hdfs:///user/bbkruit/sample.warc.gz' # 'hdfs:///user/bbkruit/sample.warc.gz' #"/home/wdps1813/scratch/wdps1813/wdps/data/testing.warc.gz"
-stanford =  '/home/wdps1813/scratch/wdps1813/wdps/stanford-ner-2017-06-09'
+in_file = 'hdfs:///user/bbkruit/sample.warc.gz' # 'hdfs:///user/bbkruit/sample.warc.gz' #"/home/wdps1813/scratch/wdps1813/wdps/data/testing.warc.gz"
+stanford = '/home/wdps1813/scratch/wdps1813/wdps/stanford-ner-2017-06-09'
 
 # Create Spark Context -- Remove this when running on cluster
 # sc = SparkContext.getOrCreate()
@@ -185,8 +185,8 @@ sc = SparkContext(conf = conf,
             batchSize = 1024)
 
 st = StanfordNERTagger(stanford + '/classifiers/english.all.3class.distsim.crf.ser.gz',
-                       stanford + '/stanford-ner-3.8.0.jar',
-                       encoding='utf-8')
+                       stanford + '/stanford-ner.jar')#,
+                      # encoding='utf-8')
 
 rdd_whole_warc_file = rdd = sc.newAPIHadoopFile(in_file,
                                                 "org.apache.hadoop.mapreduce.lib.input.TextInputFormat",
