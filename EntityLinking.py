@@ -8,7 +8,7 @@ for index in range(len(queries)):
 
     print('Searching for "%s"...' % query)
     #looking for queries that we get from the token with elasticsearch
-    response = requests.get(ELASTICSEARCH_URL, params={'q': query, 'size':100})
+    response = requests.get(ELASTICSEARCH_URL, params={'q': query, 'size':1000})
 
 
 #select unique query results
