@@ -1,0 +1,4 @@
+[http]
+	sslVerify = true
+	sslCAPath = /home/wdps1813/scratch/wdps1813/wdps/venv/ssl/cacert.pem
+	sslCAInfo = /home/wdps1813/scratch/wdps1813/wdps/venv/ssl/cacert.pem
