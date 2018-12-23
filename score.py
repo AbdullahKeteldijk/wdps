@@ -7,7 +7,8 @@ pred_file = sys.argv[2]
 gold = {}
 for line in open(gold_file):
     record, string, entity = line.strip().split('\t', 2)
-    gold[(record, string)] = entity
+    gold[string] = entity
+    # gold[(record, string)] = entity
 n_gold = len(gold)
 print('gold: %s' % n_gold)
 
@@ -15,7 +16,8 @@ print('gold: %s' % n_gold)
 pred = {}
 for line in open(pred_file):
     record, string, entity = line.strip().split('\t', 2)
-    pred[(record, string)] = entity
+    pred[string] = entity
+    # pred[(record, string)] = entity
 n_predicted = len(pred)
 print('predicted: %s' % n_predicted)
 
