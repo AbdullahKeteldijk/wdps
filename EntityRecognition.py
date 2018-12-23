@@ -135,7 +135,10 @@ Cleans each HTML page from the WARC file in such a way that only the text remain
 
     input
         x: HTML page
-        record_attribute: ..
+        record_attribute: this is a string to denote the header of the warc record
+    
+    output
+        html_pages_array: a 2 dimensional array with the identifier of the HTML page and the cleaned text from the HTML page.
 
 '''
     
@@ -152,7 +155,7 @@ Cleans each HTML page from the WARC file in such a way that only the text remain
 
     stream = BytesIO(wholeTextFile)
 
-    list_error = [] # This is to see where the error occured
+    list_error = [] # This is to see where the error occured. It helps to debug the code.
     try:
         for record in ArchiveIterator(stream):
 
@@ -193,26 +196,19 @@ Cleans each HTML page from the WARC file in such a way that only the text remain
     return html_pages_array
 
 
-
-# java_path = "C:\Program Files\Java\jre1.8.0_191\binjava.exe"
-# os.environ['JAVAHOME'] = java_path
-
 record_attribute = 'WARC-Record-ID'
-# Here we use a smaller testfile due to computation time. Use the sample.war.gz for real testing.
-in_file = 'hdfs:///user/bbkruit/sample.warc.gz' # 'hdfs:///user/bbkruit/sample.warc.gz' #"/home/wdps1813/scratch/wdps1813/wdps/data/testing.warc.gz"
+in_file = 'hdfs:///user/bbkruit/sample.warc.gz' 
 stanford = '/home/wdps1813/scratch/wdps1813/wdps/stanford-ner-2017-06-09/'
 
-# Create Spark Context -- Remove this when running on cluster
-# sc = SparkContext.getOrCreate()
 
-conf = SparkConf().setAppName("Entity Recognition") #.setMaster("local[*]")
+conf = SparkConf().setAppName("Entity Recognition") 
 sc = SparkContext(conf = conf,
             serializer = PickleSerializer(),  # Default serializer
              # Unlimited batch size -> BatchedSerializer instead of AutoBatchedSerializer
             batchSize = 1024)
 
 st = StanfordNERTagger(stanford + '/classifiers/english.all.3class.distsim.crf.ser.gz',
-                       stanford + '/stanford-ner.jar'),
+                       stanford,# + '/stanford-ner.jar'), # You might want to include this if the tagger cannot be found.
                        encoding='utf-8')
 
 rdd_whole_warc_file = rdd = sc.newAPIHadoopFile(in_file,
@@ -220,17 +216,15 @@ rdd_whole_warc_file = rdd = sc.newAPIHadoopFile(in_file,
                                                 "org.apache.hadoop.io.LongWritable",
                                                 "org.apache.hadoop.io.Text",
                                                 conf={"textinputformat.record.delimiter": "WARC/1.0"})
-
+# Clean HTML pages
 rdd_html_cleaned = rdd_whole_warc_file.flatMap(lambda x: decode(x, record_attribute))
-
-print("step 2")
 
 
 # Extract named Entities
 candidate_entities = rdd_html_cleaned.map(lambda x: get_candidate_entities(x, st))
-# stanford_rdd = rdd_html_cleaned.map(lambda x: ner_spacy(x))
-print(candidate_entities.collect())
 
-#print(stanford_rdd.collect())
-# candidate_entities.saveAsTextFile('Entities_with_POS_complete4.csv')
+print(candidate_entities.collect()) # This is used to run the program
+
+
+# candidate_entities.saveAsTextFile('Candidate_Entities.csv') # We got memory errors when we used this part.
 print('Done')
