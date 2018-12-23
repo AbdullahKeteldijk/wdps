@@ -204,7 +204,7 @@ try:
 		with open("sample_predictions.tsv", 'wb') as f:
 		    writer = csv.DictWriter(f, delimiter='\t')
 		    writer.writerows(pred)
-			"""
+		"""
 		for i in ids:
 			i = i.replace('/','.')
 			i = i[1:]
