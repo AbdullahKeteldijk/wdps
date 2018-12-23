@@ -10,6 +10,7 @@ ES_PID=$!
 until [ -n "$(cat .es_log* | grep YELLOW)" ]; do sleep 1; done
 echo "elasticsearch should be running now on node $ES_NODE:$ES_PORT (connected to process $ES_PID)"
 
+### Starting Trident ###
 KB_PORT=9090
 KB_BIN=/home/bbkruit/scratch/trident/build/trident
 KB_PATH=/home/jurbani/data/motherkb-trident
@@ -23,6 +24,9 @@ sleep 5
 KB_PID=$!
 echo "trident should be running now on node $KB_NODE:$KB_PORT and $KB_NODE2:$KB_PORT   (connected to process $KB_PID)"
 
-### Starting Trident ###
 
-python3 SPARQL_code.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT
+time python3 EntityRecognition.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT > sample_predictions.tsv
+
+python3 score.py data/sample.annotations.tsv sample_predictions.tsv
+
+
