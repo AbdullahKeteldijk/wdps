@@ -6,7 +6,6 @@ import networkx as nx
 import nltk
 from nltk.corpus import stopwords
 
-
 def get_top_percent(df, percent):
 
     no_rows = df.shape[0]
@@ -17,12 +16,6 @@ def get_top_percent(df, percent):
 
 
     return df_top_one
-
-
-
-
-
-
 
 def to_dict(df):
 
