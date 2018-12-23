@@ -12,6 +12,12 @@ For this assignment we had to perform [Entity Linking](https://en.wikipedia.org/
 
 3) Entity linking, using ElasticSearch and knowledge base RDF - queries. 
 
+## Step 1: 
+
+## Step 2:
+
+## Step 3:
+
 # Assignment 2: Creating a knowledgebase from UrbanDictionary.com
 Text written on the internet is often not as well written as text on Wikipedia or in newspapers the Wall Street Journal. However, these are often used in information extraction methods on the web. This can cause some methods to perform to have suboptimal performences when they come accross slang terms. People on the internet often use slang terms which are difficult to disambiguate using standard methods.  To our knowledge there is no such thing as a knowlegdebase for slang terms. Possible use cases for such a knowledge base are manifold. We know that especially on social media people tend to use slang. Companies might be interested to figure out what consumers are talking about and a knowledgebase containing slang terms would help a lot with this kind of information extraction. Furthermore we know of cases where judges used the UrbanDictionary to [convict criminals](https://www.nytimes.com/2013/05/21/business/media/urban-dictionary-finds-a-place-in-the-courtroom.html?pagewanted=all&_r=1). This shows that it could even be used for judical applications and police investigations.
 
