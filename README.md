@@ -2,6 +2,8 @@
 Web Data Processing Systems 2018 (VU course XM_40020)
 Group 13
 
+# Running the solution:
+- Bash Run run_final.sh
 
 # Assignment 1: Large Scale Entity Linking
 For this assignment we had to perform [Entity Linking](https://en.wikipedia.org/wiki/Entity_linking) on a collection of web pages. In order to do this we divided the work into two parts. In the first part we extracted the candidate entities. In the second part we linked these entities to the entities in the knowledge base. For this assignment we used Python 3.6. The code recognition was primarily tested locally and then run on the DAS-4 cluster.
