@@ -33,4 +33,10 @@ python3 EntityLinking.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT > sample_prediction
 
 python3 score.py data/sample.annotations.tsv sample_predictions.tsv
 
+# Data for UrbanDatabase.py can be downloaded at : https://github.com/mattbierner/urban-dictionary-entry-collector
+# Download Part 1-4
+python3 UrbanDatabase.py
 
+python3 EntityLinking_UrbanData.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT > sample_predictions_UrbanData.tsv
+
+python3 score.py data/sample.annotations.tsv sample_predictions_UrbanData.tsv
