@@ -25,7 +25,10 @@ We run the UrbanData.py to get the 1% of the most popular words. These words are
 ## Step 2: The knowledge graph
 
 
+## Running the solution
 
+- To run the solution, pull the source code and locate the run_final.sh file
+- Run this bash script, and it will walk through the different programs and functions. 
 
 
 
