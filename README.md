@@ -6,6 +6,12 @@ Web Data Processing Systems 2018 (VU course XM_40020)
 # Assignment 1: Large Scale Entity Linking
 For this assignment we had to perform [Entity Linking](https://en.wikipedia.org/wiki/Entity_linking) on a collection of web pages. In order to do this we divided the work into two parts. In the first part we extracted the candidate entities. In the second part we linked these entities to the entities in the knowledge base. 
 
+1) Reading the WARC file from the HDFS: To read the WARC files from HDFS, we used the function newAPIHadoopFile together with a custom delimiter which we set to: "WARC/1.0". This gives us as a RDD containing single WARC records as elements as a result, which can then be parsed and cleaned.
+
+2) Cleaning the HTML, in order to be able to run the Stanford NER tagger, of the StanfordCoreNLP library. (https://stanfordnlp.github.io/CoreNLP/index.html)
+
+3) Entity linking, using ElasticSearch and knowledge base RDF - queries. 
+
 # Assignment 2: Creating a knowledgebase from UrbanDictionary.com
 Text written on the internet is often not as well written as text on Wikipedia or in newspapers the Wall Street Journal. However, these are often used in information extraction methods on the web. This can cause some methods to perform to have suboptimal performences when they come accross slang terms. People on the internet often use slang terms which are difficult to disambiguate using standard methods.  To our knowledge there is no such thing as a knowlegdebase for slang term. 
 
