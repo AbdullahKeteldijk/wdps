@@ -54,21 +54,6 @@ def to_dict(df):
 
             json_format[entry[i]] = entry_dict
 
-
-        # if entry[entry[i][defid]] !=
-        # defid_dict = {'defid': defid[i]}
-        # word_dict = {'word': word[i]}
-        # author_dict = {'author': author[i]}
-        #
-        #
-        # definition_dict = {'definition': definition[i]}
-        # example_dict = {'example': example[i]}
-        # thumps_up_dict = {'thumps_up': thumps_up[i]}
-        # thumps_down_dict = {'thumps_down': thumps_down[i]}
-        # entry_dict[entry] = {defid_dict, word_dict, author_dict, definition_dict, example_dict, thumps_up_dict, thumps_down_dict}
-
-
-
     return json_format
 
 
