@@ -1,7 +1,16 @@
 # wdps2018
 Web Data Processing Systems 2018 (VU course XM_40020)
 
+
+
 # Assignment 1: Large Scale Entity Linking
+For this assignment we had to perform [Entity Linking](https://en.wikipedia.org/wiki/Entity_linking) on a collection of web pages. In order to do this we divided the work into two parts. In the first part we extracted the candidate entities. In the second part we linked these entities to the entities in the knowledge base. 
+
+# Assignment 2: Creating a knowledgebase from UrbanDictionary.com
+Text written on the internet is often not as well written as text on Wikipedia or in newspapers the Wall Street Journal. However, these are often used in information extraction methods on the web. This can cause some methods to perform to have suboptimal performences when they come accross slang terms. People on the internet often use slang terms which are difficult to disambiguate using standard methods.  To our knowledge there is no such thing as a knowlegdebase for slang term. 
+We therefore constructed a knowledge graph of words on UrbanDictionary.com to enhance the results of our entity linking code.  We got the data from [Matt Bierner] (https://github.com/mattbierner/urban-dictionary-entry-collector).
+
+
 The first assignment for this course is to perform [Entity Linking](https://en.wikipedia.org/wiki/Entity_linking) on a collection of web pages. Your solution should be scalable and accurate, and conform to the specifications below. You should work in groups of 3 or 4 people, and use a version control system that we can access. After forming a group, set up a private version control repository using [BitBucket](https://bitbucket.org) or [Github](http://github.com) and give me access (my username is bennokr on both websites). If you need help with this, contact me. You can use *any existing languages or tools you want*, as long as it's easy for us to run it on the DAS-4 cluster. Of course, your solution is not allowed to call web services over the internet. You are encouraged to use the technologies covered in the lectures.
 
 Your solution should be runnable trough a bash script with the command line options specified below. An example of some dummy starter code is available in this repository.
