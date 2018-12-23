@@ -8,7 +8,22 @@ For this assignment we had to perform [Entity Linking](https://en.wikipedia.org/
 
 # Assignment 2: Creating a knowledgebase from UrbanDictionary.com
 Text written on the internet is often not as well written as text on Wikipedia or in newspapers the Wall Street Journal. However, these are often used in information extraction methods on the web. This can cause some methods to perform to have suboptimal performences when they come accross slang terms. People on the internet often use slang terms which are difficult to disambiguate using standard methods.  To our knowledge there is no such thing as a knowlegdebase for slang term. 
-We therefore constructed a knowledge graph of words on UrbanDictionary.com to enhance the results of our entity linking code.  We got the data from [Matt Bierner](https://github.com/mattbierner/urban-dictionary-entry-collector).
+
+We therefore constructed a knowledge base of words on UrbanDictionary.com to enhance the results of our entity linking code. We call this knowledge UrbanData. Words that cannot be found in Trident will be looked up in UrbanData. Furthermore we created a directed graph of the data that shows the relations between the term. We did this to display the potential of UrbanData as a knowledgebase. Since the data is very large we only used a subset of the data. We got the data from [Matt Bierner](https://github.com/mattbierner/urban-dictionary-entry-collector). 
+
+To run the code first download all four data sets from his [GitHub repository](https://github.com/mattbierner/urban-dictionary-entry-collector).
+## Step 1: The knowledgebase
+
+We run the UrbanData.py to get the 1% of the most popular words. These words are stored in Json format. Since this is only a test version we made it so that there is only one instance of each word in the json file. The json file is than added to our SPARQL query along side Trident. Instead of of a Trident identifier it will return the 'defid'. This identifier refers to the specific definition in UrbanData.
+
+## Step 2: The knowledge graph
+
+
+
+
+
+
+
 
 
 The first assignment for this course is to perform [Entity Linking](https://en.wikipedia.org/wiki/Entity_linking) on a collection of web pages. Your solution should be scalable and accurate, and conform to the specifications below. You should work in groups of 3 or 4 people, and use a version control system that we can access. After forming a group, set up a private version control repository using [BitBucket](https://bitbucket.org) or [Github](http://github.com) and give me access (my username is bennokr on both websites). If you need help with this, contact me. You can use *any existing languages or tools you want*, as long as it's easy for us to run it on the DAS-4 cluster. Of course, your solution is not allowed to call web services over the internet. You are encouraged to use the technologies covered in the lectures.
