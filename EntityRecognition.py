@@ -343,9 +343,10 @@ def get_best(i):
 #best matches are filtered based on the entity type
 
 print('Best matches:')
-
+pred = {}
 for i in sorted(ids, key=get_best, reverse=True)[:3]:
     print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
+    pred[labels[i]] = i
     sys.stdout.flush()
     
  
