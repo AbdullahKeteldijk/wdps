@@ -198,7 +198,8 @@ try:
 		pred = {}
 		for i in sorted(ids, key=get_best, reverse=True)[:1]:
 		    print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
-		    pred[labels[i]] = i
+		    label = list(labels[i])
+		    pred[label] = i
 		    sys.stdout.flush()
 
 		with open("sample_predictions.tsv", 'wb') as f:
