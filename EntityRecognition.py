@@ -182,7 +182,7 @@ Cleans each HTML page from the WARC file in such a way that only the text remain
                     list_error.append('6')
                     # Build up the resulting list.
                     list_error.append('7')
-                    result2 = result2.encode('ascii', errors="ignore").decode('ascii')
+                    result2 = result2.encode('ascii', errors="ignore").decode('ascii') # Removing all strange characters like emojis
                     list_error.append('7.1')
                     if result2 != '' and isinstance(result2, str):
                         html_pages_array.append([record_id, result2])
