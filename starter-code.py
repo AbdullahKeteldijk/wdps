@@ -11,6 +11,7 @@ def find_labels(payload, labels):
         if key and (label in payload):
             yield key, label, freebase_id
 
+            
 
 
 def split_records(stream):
@@ -22,6 +23,7 @@ def split_records(stream):
         else:
             payload += line
 
+            
 if __name__ == '__main__':
     import sys
     import pdb
@@ -31,6 +33,7 @@ if __name__ == '__main__':
         print('Usage: python starter-code.py INPUT')
         sys.exit(0)
 
+        
     cheats = dict((line.split('\t',2) for line in open('data/sample-labels-cheat.txt').read().splitlines()))
     print(cheats)
     with open(INPUT, errors='ignore') as fo:
