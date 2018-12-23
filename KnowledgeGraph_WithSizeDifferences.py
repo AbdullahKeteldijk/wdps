@@ -121,7 +121,8 @@ def main():
     
     g, sizeOfNodes = Dict2Graph(df_dict_clean)
     
-    nx.draw(g, with_labels=True, node_size=sizeOfNodes)
+    pos = nx.kamada_kawai_layout(g,scale=4)
+    nx.draw(g,pos, with_labels=True, node_size=sizeOfNodes,font_size=6)
     plt.draw()
     # plt.savefig("/Users/Desktop/graphhhh.png", dpi=1000)  << activeer als je wilt opslaan, dpi=1000 zorgt voor inzoom mogelijkheid
     
