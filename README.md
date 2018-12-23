@@ -20,7 +20,7 @@ We therefore constructed a knowledge base of words on UrbanDictionary.com to enh
 To run the code first download all four data sets from his [GitHub repository](https://github.com/mattbierner/urban-dictionary-entry-collector).
 ## Step 1: The knowledgebase
 
-We run the UrbanData.py to get the 1% of the most popular words. These words are stored in Json format. Since this is only a test version we made it so that there is only one instance of each word in the json file. The json file is than added to our SPARQL query along side Trident. Instead of of a Trident identifier it will return the 'defid'. This identifier refers to the specific definition in UrbanData.
+We run the UrbanData.py to get the 1% of the most popular words. These words are stored in Json format. Since this is only a test version we made it so that there is only one instance of each word in the json file. The json file is than added to our SPARQL query file along side Trident. Instead of of a Trident identifier it will return the 'defid'. This identifier refers to the specific definition in UrbanData.
 
 ## Step 2: The knowledge graph
 
