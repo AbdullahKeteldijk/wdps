@@ -4,7 +4,7 @@ Web Data Processing Systems 2018 (VU course XM_40020)
 
 
 # Assignment 1: Large Scale Entity Linking
-For this assignment we had to perform [Entity Linking](https://en.wikipedia.org/wiki/Entity_linking) on a collection of web pages. In order to do this we divided the work into two parts. In the first part we extracted the candidate entities. In the second part we linked these entities to the entities in the knowledge base. 
+For this assignment we had to perform [Entity Linking](https://en.wikipedia.org/wiki/Entity_linking) on a collection of web pages. In order to do this we divided the work into two parts. In the first part we extracted the candidate entities. In the second part we linked these entities to the entities in the knowledge base. For this assignment we used Python 3.6. The code recognition was primarily tested locally and then run on the DAS-4 cluster.
 
 1) Reading the WARC file from the HDFS: To read the WARC files from HDFS, we used the function newAPIHadoopFile together with a custom delimiter which we set to: "WARC/1.0". This gives us as a RDD containing single WARC records as elements as a result, which can then be parsed and cleaned.
 
@@ -13,8 +13,19 @@ For this assignment we had to perform [Entity Linking](https://en.wikipedia.org/
 3) Entity linking, using ElasticSearch and knowledge base RDF - queries. 
 
 ## Step 1: 
+First we splitted the WARC file into WARC records. With each record containg a HTML file. These file were then cleaned of HTML code. 
+For this we used the Python packages 'WarcIO' and 'BeautifulSoup'.
 
 ## Step 2:
+Second we generated the candidate entities with three methods. 
+* We use the Stanford NER tagger to get single word entities. 
+* We use out own algorithm, the naive n-gram, to get multiword entities
+* We use the POS tagger from NLTK to get the proper nouns (NNP). We found that these are often untagged entities.
+
+Note: We save the output of each document in a seperate csv file. 
+        When we were debugging the program locally we ran into a lot of memory errors. 
+        This approach made sure that we did not get any errors anymore.
+        We merge the output in the CSV_Merge.py file.
 
 ## Step 3:
 
