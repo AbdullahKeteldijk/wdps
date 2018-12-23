@@ -29,9 +29,12 @@ Note: We save the output of each document in a seperate csv file.
 
 ## Step 3:
 
-For entity linking, we use the ElasticSearch instance and consecutively, we use the SPARQL-endpoint, whichcontains DBpedia, YAGO, Freebase and Wikidata. Entity linking means we have to disambiguate the entities,for example make the difference between plant (flora) and plant (factory). In order to do this, we take thefollowing approach:
-* Obtain ElasticSearch output, with the score. This is based on the term frequency, the inverse documentfrequency and uses vector space models for multi term queries. As these metrics are also mentionedin the Entity Linking slides, we treat this score as relevant, which also would turn out to be the caselooking at a cross check of the "cheat sheet".1https://www.elastic.co/guide/en/elasticsearch/guide/current/scoring-theory.html1
-* To employ the information from the knowledge base, we query the subject and count the amount offacts that are associated with a specific subject:SELECT * WHERE {fbase: %s ?p ?o.}
+For entity linking, we use the ElasticSearch instance and consecutively, we use the SPARQL-endpoint, whichcontains DBpedia, YAGO, Freebase and Wikidata. Entity linking means we have to disambiguate the entities,for example make the difference between plant (flora) and plant (factory). In order to do this, we take the following approach:
+
+* Obtain ElasticSearch output, with the score. This is based on the term frequency, the inverse documentfrequency and uses vector space models for multi term queries. As these metrics are also mentionedin the Entity Linking slides, we treat this score as relevant, which also would turn out to be the caselooking at a cross check of the "cheat sheet".
+* To employ the information from the knowledge base, we query the subject and count the amount offacts that are associated with a specific subject:
+
+### SELECT * WHERE {fbase: %s ?p ?o.}
 
 # Assignment 2: Creating a knowledgebase from UrbanDictionary.com
 Text written on the internet is often not as well written as text on Wikipedia or in newspapers the Wall Street Journal. However, these are often used in information extraction methods on the web. This can cause some methods to perform to have suboptimal performances when they come across slang terms. People on the internet often use slang terms which are difficult to disambiguate using standard methods.  To our knowledge there is no such thing as a knowledgebase for slang terms. Possible use cases for such a knowledge base are manifold. We know that especially on social media people tend to use slang. Companies might be interested to figure out what consumers are talking about and a knowledgebase containing slang terms would help a lot with this kind of information extraction. Furthermore we know of cases where judges used the UrbanDictionary to [convict criminals](https://www.nytimes.com/2013/05/21/business/media/urban-dictionary-finds-a-place-in-the-courtroom.html?pagewanted=all&_r=1). This shows that it could even be used for judical applications and police investigations.
