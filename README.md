@@ -29,7 +29,7 @@ We run the UrbanData.py to get the 1% of the most popular words. These words are
 
 - To run the solution, pull the source code and locate the run_final.sh file
 - Run this bash script, and it will walk through the different programs and functions. 
-
+- It will finish and an output of the F1 score will be displayed
 
 
 
