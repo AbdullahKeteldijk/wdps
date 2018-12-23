@@ -37,7 +37,7 @@ for i in range(len(list_)):
     # temp = temp.remove('')
 result = list(set(new_list))
 
-with open("Entities_3.csv", "w") as f:
+with open("Entities.csv", "w") as f:
     writer = csv.writer(f,delimiter = '\n')
     writer.writerow(result)
 
