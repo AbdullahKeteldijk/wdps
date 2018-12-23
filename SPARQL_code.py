@@ -195,10 +195,15 @@ try:
 
 		print('Best matches:')
 
-		for i in sorted(ids, key=get_best, reverse=True)[:3]:
-			print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]))
-			sys.stdout.flush()
+		pred = {}
+		for i in sorted(ids, key=get_best, reverse=True)[:1]:
+		    print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
+		    pred[labels[i]] = i
+		    sys.stdout.flush()
 
+		with open("sample_predictions.tsv", 'wb') as f:
+		    writer = csv.DictWriter(f, delimiter='\t')
+		    writer.writerows(pred)
 			"""
 		for i in ids:
 			i = i.replace('/','.')
