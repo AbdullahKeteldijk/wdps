@@ -9,12 +9,15 @@ import csv
 from io import BytesIO,StringIO
 from warcio.archiveiterator import ArchiveIterator
 from nltk.collocations import *
-# import html5lib
+import html5lib
 from bs4 import BeautifulSoup
 
-# nltk.download() # Use only if not yet installed
+
 
 def get_continuous_chunks(tagged_sent):
+ '''
+ For the naive n-gram we group consecutive words with the same tag together to create a multi-word entity.
+ '''
     continuous_chunk = []
     current_chunk = []
 
@@ -32,16 +35,33 @@ def get_continuous_chunks(tagged_sent):
 
 
 def get_candidate_entities(input, st):
+ '''
+    Here we generate candidate entity through multiple different means. 
+    We use the Stanford NER tagger to get single word entities. 
+    We use out own algorithm, the naive n-gram, to get multiword entities
+    We use the POS tagger from NLTK to get the proper nouns (NNP). We found that these are often untagged entities.
+    
+    input
+        input: cleaned text from an HTML page
+        st: the Stanford NER tagger
+    
+    return
+        output: a list of tuples containing the identifier, candidate entity and the tag of each entity mentioned in the text
+        
+    Note: We save the output of each document in a seperate csv file. 
+        When we were debugging the program locally we ran into a lot of memory errors. 
+        This approach made sure that we did not get any errors anymore.
+        We merge the output in the CSV_Merge.py file.
+    
+ '''
 
     output = []
 
     tokenized_text = word_tokenize(input[1])
-
-    #
-    classified_text = st.tag(tokenized_text)
+    classified_text = st.tag(tokenized_text) # Tokenizing the text
     sentences = [nltk.pos_tag(tokenized_text) for sent in tokenized_text]
 
-    # #################333
+    
     chunks = get_continuous_chunks(classified_text)
 
     # named_entities = get_continuous_chunks(ne_tagged_sent)
@@ -56,9 +76,6 @@ def get_candidate_entities(input, st):
 
         if len(list_ent) <= 4:
             naive_ngram.append((input[0], chunked_ents[i][0], chunked_ents[i][1]))
-    #
-    # #################################33
-    # NNP
 
 
     nnp_list = []
@@ -100,10 +117,11 @@ def get_candidate_entities(input, st):
 
     return output
 
-
-
-# defines which tags are excluded from the HTML file
+ 
 def visible(element):
+ '''
+    Defines which tags are excluded from the HTML file
+ '''
     if element.parent.name in ['style', 'script', '[document]', 'head', 'title']:
         return False
     elif re.match('<!--.*-->', element):
@@ -112,6 +130,15 @@ def visible(element):
 
 
 def decode(x, record_attribute):
+'''
+Cleans each HTML page from the WARC file in such a way that only the text remains.
+
+    input
+        x: HTML page
+        record_attribute: ..
+
+'''
+    
     html_pages_array = []
 
     _, payload = x
