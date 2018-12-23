@@ -24,12 +24,13 @@ We run the UrbanData.py to get the 1% of the most popular words. These words are
 
 ## Step 2: The knowledge graph
 
+Our goal here is to show the potenial of UrbanData. We therefore present a minimum viable product (MVP).
+We took a subset of the data (only words that start with an 'a') to create the directed graph to ensure visibility of the graph. Furthermore we focused only on one word relations. Entries that contained more words were excluded. Lastly the relations are not tagged in an RDF as we used a very simplistic approach or relation extraction.
+For this graph we saved each term in a dictonary as a key. We then looked at each word the definition of the data to see if it matches the key we found and we added it as a value. We set the condition that each value could only appear once for each key and that the key itself could not be added as a value. This process was repeated twice because in the beginning we start with an empty dictionary. This algorithm performs better as it progresses and collects more entries to the dictionary. 
 
-## Running the solution
+Finally we constructed the directed graph. Each key is converted to a node and each value is converted to an edge. The resulting graph is shown in the appendix of our report. 
 
-- To run the solution, pull the source code and locate the run_final.sh file
-- Run this bash script, and it will walk through the different programs and functions. 
-- It will finish and an output of the F1 score will be displayed
+
 
 
 
