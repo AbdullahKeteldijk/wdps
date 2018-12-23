@@ -6,6 +6,7 @@ import networkx as nx
 import nltk
 from nltk.corpus import stopwords
 
+
 def get_top_percent(df, percent):
 
     no_rows = df.shape[0]
@@ -16,6 +17,7 @@ def get_top_percent(df, percent):
 
 
     return df_top_one
+
 
 def to_dict(df):
 
@@ -42,8 +44,6 @@ def to_dict(df):
         if entry[i] not in json_format.keys() or entry[i] in json_format.keys() and json_format[entry[i]]['thumps_up'] < thumps_up[i]:
             for j in range(len(keys)):
                 entry_dict[keys[j]] = labels[j]
-
-
 
             json_format[entry[i]] = entry_dict
 
