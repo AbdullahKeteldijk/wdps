@@ -14,7 +14,7 @@ For this assignment we had to perform [Entity Linking](https://en.wikipedia.org/
 
 ## Step 1: 
 First we splitted the WARC file into WARC records. With each record containg a HTML file. These file were then cleaned of HTML code. 
-For this we used the Python packages 'WarcIO' and 'BeautifulSoup'.
+For this we used the Python packages 'WarcIO' and 'BeautifulSoup'. We initially use utf-8 encodings, however there are a lot of strange characters that caonnot be processed in our code (e.g. ❤︎). We removed them all by using the ascii encoding on the whole text and then decode it back. After the documents are cleaned they are stored in a list together with their unique identifier.
 
 ## Step 2:
 Second we generated the candidate entities with three methods. 
@@ -35,6 +35,8 @@ For entity linking, we use the ElasticSearch instance and consecutively, we use 
 * To employ the information from the knowledge base, we query the subject and count the amount offacts that are associated with a specific subject:
 
 #####                   SELECT * WHERE {fbase: %s ?p ?o.}
+
+
 
 # Assignment 2: Creating a knowledgebase from UrbanDictionary.com
 Text written on the internet is often not as well written as text on Wikipedia or in newspapers the Wall Street Journal. However, these are often used in information extraction methods on the web. This can cause some methods to perform to have suboptimal performances when they come across slang terms. People on the internet often use slang terms which are difficult to disambiguate using standard methods.  To our knowledge there is no such thing as a knowledgebase for slang terms. Possible use cases for such a knowledge base are manifold. We know that especially on social media people tend to use slang. Companies might be interested to figure out what consumers are talking about and a knowledgebase containing slang terms would help a lot with this kind of information extraction. Furthermore we know of cases where judges used the UrbanDictionary to [convict criminals](https://www.nytimes.com/2013/05/21/business/media/urban-dictionary-finds-a-place-in-the-courtroom.html?pagewanted=all&_r=1). This shows that it could even be used for judical applications and police investigations.
