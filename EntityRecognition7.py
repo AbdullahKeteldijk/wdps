@@ -11,9 +11,9 @@ from warcio.archiveiterator import ArchiveIterator
 from nltk.collocations import *
 # import html5lib
 from bs4 import BeautifulSoup
-
+ 
 # nltk.download() # Use only if not yet installed
-
+ 
 def get_continuous_chunks(tagged_sent):
     continuous_chunk = []
     current_chunk = []
@@ -179,6 +179,7 @@ candidate_entities = rdd_html_cleaned.map(lambda x: get_candidate_entities(x, st
 
 print(candidate_entities.collect())
 
-
+ 
 print('Done')
-
+ 
+ 
