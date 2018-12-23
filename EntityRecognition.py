@@ -208,7 +208,7 @@ sc = SparkContext(conf = conf,
             batchSize = 1024)
 
 st = StanfordNERTagger(stanford + '/classifiers/english.all.3class.distsim.crf.ser.gz',
-                       stanford,# + '/stanford-ner.jar'), # You might want to include this if the tagger cannot be found.
+                       stanford, '/stanford-ner.jar', 
                        encoding='utf-8')
 
 rdd_whole_warc_file = rdd = sc.newAPIHadoopFile(in_file,
