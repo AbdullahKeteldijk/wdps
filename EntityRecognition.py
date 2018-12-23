@@ -36,7 +36,7 @@ def get_continuous_chunks(tagged_sent):
 
 def get_candidate_entities(input, st):
  '''
-    Here we generate candidate entity through multiple different means. 
+    Here we generate candidate entity with three methods. 
     We use the Stanford NER tagger to get single word entities. 
     We use out own algorithm, the naive n-gram, to get multiword entities
     We use the POS tagger from NLTK to get the proper nouns (NNP). We found that these are often untagged entities.
