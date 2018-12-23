@@ -23,7 +23,9 @@ KB_PID=$!
 echo "trident should be running now on node $KB_NODE:$KB_PORT and $KB_NODE2:$KB_PORT   (connected to process $KB_PID)"
 
 
-time python3 EntityRecognition.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT > sample_predictions.tsv
+time python3 EntityRecognition.py 
+
+python3 EntityLinking.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT > sample_predictions.tsv
 
 python3 score.py data/sample.annotations.tsv sample_predictions.tsv
 
