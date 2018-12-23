@@ -17,9 +17,7 @@ KB_PATH=/home/jurbani/data/motherkb-trident
 
 prun -o .kb_log -v -np 1 $KB_BIN server -i $KB_PATH --port $KB_PORT </dev/null 2> .kb_node &
 echo "waiting 5 seconds for trident to set up..."
-#until [ -n "$KB_NODE" ]; do KB_NODE=$(cat .kb_node | grep '^:' | grep -oP '(node...)'); done
-until [ -n "$KB_NODE" ]; do KB_NODE=$(cat .kb_node | grep '^:' | grep -oP '(node...)') &
-                            KB_NODE2=$(cat .kb_node | grep '^:' | grep -oP '(node...)'); done
+until [ -n "$KB_NODE" ]; do KB_NODE=$(cat .kb_node | grep '^:' | grep -oP '(node...)') ; done
 sleep 5
 KB_PID=$!
 echo "trident should be running now on node $KB_NODE:$KB_PORT and $KB_NODE2:$KB_PORT   (connected to process $KB_PID)"
