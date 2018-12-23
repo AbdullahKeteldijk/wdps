@@ -1,4 +1,6 @@
 
+
+
 import re
 import csv
 
@@ -21,10 +23,8 @@ for i in range(0,len(entity_list),2):
 
 result = list(set(result))
 
-
-
- 
-
 with open("Entities.csv", "w") as f:
     writer = csv.writer(f,delimiter = '\n')
     writer.writerow(result)
+
+ 
