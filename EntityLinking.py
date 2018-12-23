@@ -2,7 +2,10 @@ _, DOMAIN_TRIDENT, DOMAIN_ELASTIC 	= sys.argv
 ELASTICSEARCH_URL			= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
 TRIDENT_URL 				= 'http://%s/sparql' % DOMAIN_TRIDENT
 
-
+with open('Entities.csv', 'r') as csvfile:
+	queries = csv.reader(csvfile)
+	queries = list(queries)
+    
 for index in range(len(queries)):
     query = queries[index][0] # token obtained
 
@@ -11,22 +14,22 @@ for index in range(len(queries)):
     response = requests.get(ELASTICSEARCH_URL, params={'q': query, 'size':1000})
 
 
-#select unique query results
-ids = set()
-labels = {}
-scores = {}
+    #select unique query results
+    ids = set()
+    labels = {}
+    scores = {}
 
-#obtain freebase id's from elasticsearch responses
-if response:
-    response = response.json()
+    #obtain freebase id's from elasticsearch responses
+    if response:
+        response = response.json()
 
-for hit in response.get('hits', {}).get('hits', []):
-        freebase_id = hit.get('_source', {}).get('resource')
-        label = hit.get('_source', {}).get('label')
-        score = hit.get('_score', 0)
-        ids.add( freebase_id )
-        scores[freebase_id] = max(scores.get(freebase_id, 0), score)
-        labels.setdefault(freebase_id, set()).add( label )
+    for hit in response.get('hits', {}).get('hits', []):
+            freebase_id = hit.get('_source', {}).get('resource')
+            label = hit.get('_source', {}).get('label')
+            score = hit.get('_score', 0)
+            ids.add( freebase_id )
+            scores[freebase_id] = max(scores.get(freebase_id, 0), score)
+            labels.setdefault(freebase_id, set()).add( label )
 
 
 
@@ -101,6 +104,60 @@ print('Counting KB facts...')
 #Link all results from elasticsearch to trident database.  %s in po_templare (are the unique freebase hits)
 facts  = {}
 n_total = 0
+
+### Parallel Utils ###
+
+def process_id(id):
+    """process a single ID"""
+    # and update some data with PUT
+    # requests.put(url_t % id, data=data)
+    id = id.replace('/', '.')
+    id = id[1:]
+    response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % id})
+
+    return response.json()
+
+
+def process_range(id, store=None):
+    """process a number of ids, storing the results in a dict"""
+    if store is None:
+        store = {}
+    store[id] = process_id(id)
+    return store
+
+
+from threading import Thread
+
+
+def threaded_process_range(nthreads, ids):
+    """process the id range in a specified number of threads"""
+    store = {}
+    threads = []
+    # create the threads
+    for i in range(nthreads):
+        id = ids[i]
+        t = Thread(target=process_range, args=(id, store))
+        threads.append(t)
+
+    # start the threads
+    [t.start() for t in threads]
+    # wait for the threads to finish
+    [t.join() for t in threads]
+    return store
+
+##################################################
+
+ids = list(ids)
+
+dict = threaded_process_range(len(ids),ids)
+for i in ids:
+    response = dict[i]
+    n = int(response.get('stats', {}).get('nresults', 0))
+    print(i, ':', n)
+    # sys.stdout.flush()
+    facts[i] = n
+    n_total = n_total + n
+
 for i in ids:
 i = i.replace('/','.')
 i = i[1:]
@@ -134,7 +191,8 @@ print('Best matches:')
 pred = {}
 for i in sorted(ids, key=get_best, reverse=True)[:1]:
     print(i, ':', labels[i], '(facts: %s, score: %.2f)' % (facts[i], scores[i]) )
-    pred[labels[i]] = i
+    labels = list[labels[i]]
+    pred[labels] = i
     sys.stdout.flush()
 
 with open("sample_predictions.tsv", 'wb') as f:
