@@ -5,7 +5,7 @@ from collections import defaultdict
 import networkx as nx
 import nltk
 from nltk.corpus import stopwords
-
+import numpy as np
 
 def get_top_percent(df, percent):
 
