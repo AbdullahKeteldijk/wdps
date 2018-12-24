@@ -159,16 +159,16 @@ for i in ids:
     n_total = n_total + n
 
 for i in ids:
-i = i.replace('/','.')
-i = i[1:]
-response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
-if response:
-    response = response.json()
-    n = int(response.get('stats',{}).get('nresults',0))
-    print(i, ':', n)
-    sys.stdout.flush()
-    facts[i] = n
-    n_total = n_total+n
+	i = i.replace('/','.')
+	i = i[1:]
+	response = requests.post(TRIDENT_URL, data={'print': False, 'query': po_template % i})
+	if response:
+	    response = response.json()
+	    n = int(response.get('stats',{}).get('nresults',0))
+	    print(i, ':', n)
+	    sys.stdout.flush()
+	    facts[i] = n
+	    n_total = n_total+n
 
 translate = {}
 # Replacing / in freebase ID's in scores dict
