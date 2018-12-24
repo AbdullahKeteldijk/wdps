@@ -20,20 +20,20 @@ def get_continuous_chunks(tagged_sent):
  '''
  For the naive n-gram we group consecutive words with the same tag together to create a multi-word entity.
  '''
-    continuous_chunk = []
-    current_chunk = []
+   continuous_chunk = []
+   current_chunk = []
 
-    for token, tag in tagged_sent:
-        if tag != "O":
-            current_chunk.append((token, tag))
-        else:
-            if current_chunk: # if the current chunk is not empty
-                continuous_chunk.append(current_chunk)
-                current_chunk = []
-    # Flush the final current_chunk into the continuous_chunk, if any.
-    if current_chunk:
-        continuous_chunk.append(current_chunk)
-    return continuous_chunk
+   for token, tag in tagged_sent:
+       if tag != "O":
+           current_chunk.append((token, tag))
+       else:
+           if current_chunk: # if the current chunk is not empty
+               continuous_chunk.append(current_chunk)
+               current_chunk = []
+   # Flush the final current_chunk into the continuous_chunk, if any.
+   if current_chunk:
+       continuous_chunk.append(current_chunk)
+   return continuous_chunk
 
 
 def get_candidate_entities(input, st):
