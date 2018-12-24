@@ -27,7 +27,7 @@ time python3 EntityRecognition.py
 
 python3 UrbanDatabase.py
 
-python3 CSV_merge.py
+python3 CSV_Merge.py
 
 python3 EntityLinking.py $KB_NODE:$KB_PORT $ES_NODE:$ES_PORT > sample_predictions.tsv
 

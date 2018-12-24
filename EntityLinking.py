@@ -1,3 +1,6 @@
+import sys
+
+
 _, DOMAIN_TRIDENT, DOMAIN_ELASTIC 	= sys.argv
 ELASTICSEARCH_URL			= 'http://%s/freebase/label/_search' % DOMAIN_ELASTIC
 TRIDENT_URL 				= 'http://%s/sparql' % DOMAIN_TRIDENT
